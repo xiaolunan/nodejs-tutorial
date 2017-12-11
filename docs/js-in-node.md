@@ -1,6 +1,6 @@
 # Node 中的 JavaScript
 
-![node中的JavaScript](./media/node中的JavaScript.png)
+![node中的JavaScript](../media/node中的JavaScript.png)
 
 > 了解 Node 中的 JavaScript 由哪几部分组成
 

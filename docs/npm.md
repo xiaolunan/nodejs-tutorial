@@ -1,16 +1,18 @@
-### npm
+# npm 和 包
 
 - node package manager
 - 因为都是 JavaScript 所以慢慢的前端的包也放到了 npm 中
 - 官方的对 npm 的定义：JavaScript Package Manager
 
-#### npm 网站
+## npm 的两层含义
+
+### npm 网站
 
 > npmjs.com，提供了存放数据包的能力，类似于 Github ，但是不提供版本管理
 >
 > 开发者可以把一些 JavaScript 相关工具放到这个系统中
 
-#### npm 命令行工具
+### npm 命令行工具
 
 npm 的第二层含义就是一个命令行工具，只要你安装了 node 就已经安装了 npm。
 
@@ -28,7 +30,7 @@ npm --version
 npm install --global npm
 ```
 
-#### 常用命令
+## 常用命令
 
 - `npm init`
   - `npm init -y` 可以跳过向导，快速生成，随后可以自己手动改文件
@@ -58,7 +60,7 @@ npm install --global npm
   - 查看指定命令的使用帮助
   - 例如我忘记了 uninstall 命令的简写了，这个时候，可以输入 `npm uninstall --help` 来查看使用帮助
 
-### npm 安装全局包
+## npm 安装全局包
 
 我们除了可以使用 npm 安装项目中适应的依赖包之外，还有一些包比较特殊，这种不是在项目 `require()` 使用的，而是
 通过全局安装之后使用它提供的命令来完成某种功能，就像咱们学过的 git 一样。
@@ -75,11 +77,11 @@ npm install --global npm
 > 提示：安装全局包必须加 `--global` 参数
 > 安装全局包在哪里执行都可以
 
-#### `http-server`
+### `http-server`
 
-#### `nodemon`
+### `nodemon`
 
-#### `less`
+### `less`
 
 > 参考文档：http://lesscss.org/
 > 作用：支持在命令行中打命令完成 less 文件的编译
@@ -107,7 +109,7 @@ lessc styles.less
 lessc styles.less styles.css
 ```
 
-#### browser-sync
+### browser-sync
 
 > 参考文档：https://browsersync.io/
 > 作用：文件改变浏览器自动刷新（同步测试）
@@ -124,7 +126,7 @@ npm install -g browser-sync
 browser-sync start --server --files "css/*.css, js/*.js, *.html"
 ```
 
-#### 全局包到底安装到了哪里
+### 全局包到底安装到了哪里
 
 我们可以通过在命令行输入来查看全局包的安装路径：
 
@@ -136,7 +138,7 @@ npm root -g
 
 因为以前的 node 版本一旦升级就会导致丢失了全局包，新版的 node 已经没有这个问题了。
 
-#### 解决 npm 被墙问题
+## 解决 npm 被墙问题
 
 > 参考文档：http://npm.taobao.org/
 
@@ -165,7 +167,7 @@ npm config list
 
 只要经过了上面命令的配置，则你以后所有的 `npm install` 都会使用你配置的 `registry` 下载。
 
-### package.json
+## package.json
 
 我们的项目会放到云端的仓库中，例如 github ，第三方包没有上传的意义，我们只需要把我们的源码放到云端仓库，`node_modules` 目录中存储的就是第三方包（不用担心丢失问题），如果没有 `package.json` 文件则你就找不回来了。
 
@@ -224,7 +226,13 @@ Is this ok? (yes) yes
   - npm 5 以前不会自动保存依赖信息到 package.json 文件中，必须手动加 `--save` 选项才可以
   - npm 5 以后不需要加 `--save` 选项了，因为它会自动保存依赖项
 
-#### package.json 和 package-lock.json
+### dependencies
+
+### main
+
+### scripts
+
+## package-lock.json
 
 npm 5 以前是不会有 `package-lock.json` 这个文件的。（被开发者诟病，吐槽的问题）。
 

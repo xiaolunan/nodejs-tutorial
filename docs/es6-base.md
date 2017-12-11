@@ -1,15 +1,8 @@
-## EcmaScript 6 常用语法
+## EcmaScript 6 基础语法
 
 > 参考文档：http://es6.ruanyifeng.com/
->
-> 我整理的脑图：http://naotu.baidu.com/file/9ced580d41152b51b83ebdfe1b2d0589?token=9ea2ceb492baa97d
->
-> - Node 中可以放心直接用（兼容性更高）
-> - 浏览器有的支持有的不支持
->   - 后面学习 Vue 的时候会在浏览器中也使用 EcmaScript 6
->   - 为了考虑兼容性的问题，我们需要引入编译工具，把 EcmaScript 6 转为 EcmaScript 5
->
-> 学习使用 EcmaScript 6 也是为了我们的开发效率。
+
+## EcmaScript 6 简介
 
 ### 查看离线文档
 

@@ -1,4 +1,4 @@
-# Node.js 介绍
+# Node.js 简介
 
 - [Node 官网](https://nodejs.org/en/)
 - [Node 中文社区](https://cnodejs.org/)
@@ -8,31 +8,7 @@
 - [深入浅出Node.js（一）：什么是Node.js](http://www.infoq.com/cn/articles/what-is-nodejs)
 - [Node.js发展历程与版本演化](http://www.jianshu.com/p/5b9b245fcefa)
 
-## 为什么要学习 Node.js
-
-- 企业需求
-  + 具有服务端开发经验更好（加分项）
-  + front-end
-  + back-end
-  + WEb 全栈开发工程师
-    * 全干
-  + 基本的网站开发能力
-    * 服务端
-    * 前端
-    * 运维部署
-  + 多人社区
-
-- 帮助前端开发（极大的帮助我们学习前端所谓的框架知识，都是工具）
-
-  - Vue.js
-
-    Angular
-
-    React
-
-  - 构建工具、工作流工具
-
-## Node.js 是什么
+## Node 是什么
 
 > Node 是一个服务端环境，使用 JavaScript 进行编程
 >
@@ -83,7 +59,31 @@
     - npm 通过命令的方式安装管理包
     - `npm install 包名 包名 包名。。。`
 
-## Node.js 能做什么
+## 为什么要学习 Node
+
+- 企业需求
+  + 具有服务端开发经验更好（加分项）
+  + front-end
+  + back-end
+  + WEb 全栈开发工程师
+    * 全干
+  + 基本的网站开发能力
+    * 服务端
+    * 前端
+    * 运维部署
+  + 多人社区
+
+- 帮助前端开发（极大的帮助我们学习前端所谓的框架知识，都是工具）
+
+  - Vue.js
+
+    Angular
+
+    React
+
+  - 构建工具、工作流工具
+
+## Node 能做什么
 
 - Web 服务器后台
 - 命令行工具

@@ -1,28 +1,9 @@
 # Express
 
-<!-- MarkdownTOC -->
-
-- [起步（Getting Started）](#%E8%B5%B7%E6%AD%A5%EF%BC%88getting-started%EF%BC%89)
-  - [安装](#%E5%AE%89%E8%A3%85)
-  - [hello world](#hello-world)
-  - [基本路由](#%E5%9F%BA%E6%9C%AC%E8%B7%AF%E7%94%B1)
-  - [静态服务](#%E9%9D%99%E6%80%81%E6%9C%8D%E5%8A%A1)
-  - [配置使用 `art-template` 模板引擎](#%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8-art-template-%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E)
-  - [在 Express 中获取表单 GET 请求参数](#%E5%9C%A8-express-%E4%B8%AD%E8%8E%B7%E5%8F%96%E8%A1%A8%E5%8D%95-get-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0)
-  - [在 Express 获取表单 POST 请求体数据](#%E5%9C%A8-express-%E8%8E%B7%E5%8F%96%E8%A1%A8%E5%8D%95-post-%E8%AF%B7%E6%B1%82%E4%BD%93%E6%95%B0%E6%8D%AE)
-  - [在 Express 配置使用 `express-session` 插件](#%E5%9C%A8-express-%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8-express-session-%E6%8F%92%E4%BB%B6)
-- [路由](#%E8%B7%AF%E7%94%B1)
-  - [路由方法](#%E8%B7%AF%E7%94%B1%E6%96%B9%E6%B3%95)
-  - [路由路径](#%E8%B7%AF%E7%94%B1%E8%B7%AF%E5%BE%84)
-    - [动态路径](#%E5%8A%A8%E6%80%81%E8%B7%AF%E5%BE%84)
-  - [路由处理方法](#%E8%B7%AF%E7%94%B1%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95)
-  - [app.route\(\)](#approute)
-  - [express.Router](#expressrouter)
-
-<!-- /MarkdownTOC -->
-
 原生的 http 在某些方面表现不足以应对我们的开发需求，所以我们就需要使用框架来加快我们的开发效率，框架的目的就是提高效率，让我们的代码更高度统一。
 在 Node 中，有很多 Web 开发框架，我们这里以学习 `express` 为主。
+
+## Express 介绍
 
 - [Express 官方](http://expressjs.com/)
 - [Express 中文文档（非官方）](http://www.expressjs.com.cn/)
@@ -94,7 +75,7 @@ app.post('/', function (req, res) {
 })
 ```
 
-### 静态服务
+## 静态服务
 
 > 参考文档：http://expressjs.com/en/starter/static-files.html
 
@@ -114,7 +95,7 @@ app.use('/static', express.static('public'))
 app.use('/static', express.static(path.join(__dirname, 'public')))
 ```
 
-### 配置使用 `art-template` 模板引擎
+## 配置使用 `art-template` 模板引擎
 
 Express 没有内置任何模板引擎，但是支持让你配置其它模板引擎和 Express 配合使用。
 
@@ -155,15 +136,7 @@ app.get('/', function (req, res) {
 app.set('views', 目录路径)
 ```
 
-### 在 Express 中获取表单 GET 请求参数
-
-Express 内置了一个 API，可以直接通过 `req.query` 来获取
-
-```javascript
-req.query
-```
-
-### 在 Express 获取表单 POST 请求体数据
+## 在 Express 获取表单 POST 请求体数据
 
 > 参考文档：
 
@@ -204,7 +177,7 @@ app.use(function (req, res) {
 })
 ```
 
-### 在 Express 配置使用 `express-session` 插件
+## 在 Express 配置使用 `express-session` 插件
 
 > 参考文档：https://github.com/expressjs/session
 
@@ -242,7 +215,7 @@ req.session.foo
 
 ---
 
-## 路由
+## 路由使用
 
 > 参考文档：http://expressjs.com/en/guide/routing.html
 

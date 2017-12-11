@@ -2,25 +2,15 @@
 
 > 参考文档：https://github.com/mysqljs/mysql
 
-<!-- MarkdownTOC -->
+## Hello World
 
-- [安装](#%E5%AE%89%E8%A3%85)
-- [Hello World](#hello-world)
-- [连接池连接](#%E8%BF%9E%E6%8E%A5%E6%B1%A0%E8%BF%9E%E6%8E%A5)
-- [query 使用](#query-%E4%BD%BF%E7%94%A8)
-  - [`.query(sqlString, callback)`](#querysqlstring-callback)
-  - [`.query(sqlString, values, callback)`](#querysqlstring-values-callback)
-  - [`.query(options, callback)`](#queryoptions-callback)
-
-<!-- /MarkdownTOC -->
-
-## 安装
+安装：
 
 ```shell
 npm install mysql
 ```
 
-## Hello World
+Hello World：
 
 ```javascript
 var mysql      = require('mysql');
@@ -40,6 +30,18 @@ connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
 
 connection.end();
 ```
+
+## 封装 `db-helper`
+
+## 增删改查
+
+### 查询
+
+### 新增
+
+### 修改
+
+### 删除
 
 ## 连接池连接
 
@@ -66,7 +68,7 @@ pool.getConnection(function(err, connection) {
 });
 ```
 
-## query 使用
+## query 方法
 
 ### `.query(sqlString, callback)`
 

@@ -19,6 +19,7 @@
 - 确认 Node 环境是否安装成功
   - 打开命令行，输入 `node --version`
   - 或者 `node -v`
+- ​
 
 ## REPL
 
@@ -65,9 +66,7 @@ fs.writeFile('message.txt', 'Hello Node.js', (err) => {
 });
 ```
 
-## Hello World: http
-
-很傻的服务器：
+## Hello World: Http 服务
 
 ```javascript
 // 接下来，我们要干一件使用 Node 很有成就感的一件事儿

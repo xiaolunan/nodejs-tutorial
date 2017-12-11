@@ -1,6 +1,4 @@
-## 回调函数强化
-
-> 转载请注明出处：http://blog.circle.ink/javascript-callback/
+# 回调函数强化
 
 - [知乎 - 回调函数（callback）是什么？](https://www.zhihu.com/question/19801131)
 
@@ -27,7 +25,7 @@
 
 简单举例来说就是，我打电话找你帮忙办事，但是不确定什么时间办完，我让你办完了再电话通知我。我让你通知我就是我设定的回调函数！一般用于异步通信场景。如果我不挂电话，非等你办完了知道结果了再挂这就不属于异步通信，也无需回调！作者：柳明军链接：https://www.zhihu.com/question/19801131/answer/43799125来源：知乎著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
-### JavaScript 回调函数
+## JavaScript 回调函数
 
 获取普通方法的返回值（方式一 return）：
 
@@ -168,7 +166,7 @@ fn(function (data) {
 })
 ```
 
-### 示例：原生 `ajax` 操作
+## 示例：原生 `ajax` 操作
 
 > [MDN - Using XMLHttpRequest](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest)
 
@@ -183,7 +181,7 @@ oReq.open("get", "yourFile.txt", true);
 oReq.send();
 ```
 
-### 示例：实现jQuery 的 `$.get` 方法
+## 示例：实现jQuery 的 `$.get` 方法
 
 ```javascript
 function get (url, callback) {
@@ -203,7 +201,7 @@ function get (url, callback) {
 
 
 
-### 示例：实现 jQuery 的 `$.post` 方法
+## 示例：实现 jQuery 的 `$.post` 方法
 
 ```javascript
 function post(url, data, callback) {
@@ -224,7 +222,7 @@ function post(url, data, callback) {
 
 
 
-### 示例：实现jQuery 的 `$.ajax` 方法
+## 示例：实现jQuery 的 `$.ajax` 方法
 
 ```javascript
 function ajax(options) {
@@ -248,7 +246,7 @@ function ajax(options) {
 
 
 
-### 示例：复杂需求：请求学生数据 + 所处学科数据
+## 示例：复杂需求：请求学生数据 + 所处学科数据
 
 ```javascript
 function getSubjectByStuId (stuId, callback) {
@@ -287,7 +285,7 @@ function get (url, callback) {
 
 
 
-### 示例：实现拷贝方法
+## 示例：实现拷贝方法
 
 已知 `fs.readFile` 可以读取文件，`fs.writeFile` 可以写文件。请帮我封装一个方法：`copy`。要求调用方式如下：
 
@@ -299,7 +297,7 @@ copy('被复制文件', '复制到的目标文件', function (err) {
 
 
 
-### 示例：读取文件中的 todos 列表数据
+## 示例：读取文件中的 todos 列表数据
 
 已知一个 json 文件内容如下：
 
@@ -311,7 +309,7 @@ copy('被复制文件', '复制到的目标文件', function (err) {
 
 请帮我写一个方法，调用该方法得到的结果就是 todos **数组** 。
 
-### 示例：把任务持久化保存到文件中
+## 示例：把任务持久化保存到文件中
 
 已知有一个 json 文件内容如下：
 
@@ -332,7 +330,7 @@ addTodo('写代码', function (err) {
 })
 ```
 
-### 错误优先
+## 错误优先
 
 - **如果封装的函数中有错误，不要在函数中自行处理，一般是把错误对象放到回调函数的第一个参数，这是一种约定规则，错误优先，由调用者决定如何处理这个错误**
 - 在自己封装的回调函数中不要自己处理错误

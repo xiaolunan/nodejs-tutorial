@@ -1,6 +1,6 @@
-## Node 中的模块系统
+# Node 中的模块系统
 
-### 什么是模块化
+## 什么是模块化
 
 ![模块化](http://img1.gtimg.com/digi/pics/hv1/241/121/1791/116490871.jpg)
 
@@ -29,7 +29,7 @@
 
 下面我们具体来看一下在 Node.js 中如何在多模块之间进行输入与输出。
 
-### Node 中的模块分类
+## Node 中的模块分类
 
 在开始了解具体的规则之前，我们先来了解一下在 Node 中对不模块的一个具体分类，一共就三种类别：
 
@@ -41,7 +41,7 @@
 - 用户模块（自己写的）
   - 我们在文件中写的代码很多的情况下不好编写和维护，所以我们可以考虑把文件中的代码拆分到多个文件中，那这些我们自己创建的文件就是用户模块
 
-### 模块通信之：输入 `require`
+## 模块通信之：输入 `require`
 
 ```javascript
 // 核心模块
@@ -59,7 +59,7 @@ var foo = require('./foo.js')
 var foo = require('./foo')
 ```
 
-###模块通信：输出 `exports`
+##模块通信：输出 `exports`
 
 导出多个成员：写法一（麻烦，不推荐）：
 
@@ -152,7 +152,7 @@ module.exports = function (x, y) {
 }
 ```
 
-#### 为什么 `exports = xxx` 不行
+### 为什么 `exports = xxx` 不行
 
 exports 和 `module.exports` 的一个引用：
 
@@ -191,7 +191,7 @@ var ret = fn()
 console.log(ret)
 ```
 
-#### exports 和 module.exports 的区别
+### exports 和 module.exports 的区别
 
 - exports 和 module.exports 的区别
   + 每个模块中都有一个 module 对象
@@ -210,7 +210,7 @@ console.log(ret)
   + 但是有一种赋值方式比较特殊：`exports = module.exports` 这个用来重新建立引用关系的
   + 之所以让大家明白这个道理，是希望可以更灵活的去用它
 
-#### 特殊的导出方式
+### 特殊的导出方式
 
 ```javascript
 exports = module.exports = function () {
@@ -226,3 +226,8 @@ exports.get = function () {
 }
 
 ```
+
+## 深入模块加载机制
+
+## 探索模块原理
+
