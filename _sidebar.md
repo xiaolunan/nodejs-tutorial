@@ -14,4 +14,5 @@
 - [使用 Node 操作 MySQL 数据库](node-mysql)
 - [回调函数强化](callback)
 - [全局成员](globals)
+- [综合案例：多人社区](nodecast)
 - [其它](other)
