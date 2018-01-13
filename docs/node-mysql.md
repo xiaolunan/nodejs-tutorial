@@ -1,5 +1,3 @@
-# 使用 Node 操作 MySQL 数据库
-
 > 参考文档：https://github.com/mysqljs/mysql
 
 ## Hello World

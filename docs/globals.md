@@ -1,5 +1,3 @@
-# 全局成员
-
 > 参考文档：https://nodejs.org/dist/latest-v9.x/docs/api/globals.html
 
 - Class: Buffer

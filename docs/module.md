@@ -1,5 +1,3 @@
-# Node 中的模块系统
-
 ## 什么是模块化
 
 ![模块化](http://img1.gtimg.com/digi/pics/hv1/241/121/1791/116490871.jpg)

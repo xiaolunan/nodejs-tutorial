@@ -1,5 +1,3 @@
-# 文件操作 fs
-
 > 参考文档：https://nodejs.org/dist/latest-v9.x/docs/api/fs.html
 
 ## 同步和异步

@@ -1,5 +1,3 @@
-# Node.js 简介
-
 - [Node 官网](https://nodejs.org/en/)
 - [Node 中文社区](https://cnodejs.org/)
 

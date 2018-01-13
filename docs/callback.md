@@ -1,5 +1,3 @@
-# 回调函数强化
-
 - [知乎 - 回调函数（callback）是什么？](https://www.zhihu.com/question/19801131)
 
 

@@ -1,5 +1,3 @@
-# npm 和 包
-
 - node package manager
 - 因为都是 JavaScript 所以慢慢的前端的包也放到了 npm 中
 - 官方的对 npm 的定义：JavaScript Package Manager
