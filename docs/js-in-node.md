@@ -1,9 +1,3 @@
-# Node 中的 JavaScript
-
-![node中的JavaScript](../media/node中的JavaScript.png)
-
-> 了解 Node 中的 JavaScript 由哪几部分组成
-
 - EcmaScript
   - 目前 EcmaScript 最新的标准规范：EcmaScript 2017（EcmaScript 6）
   - 推荐多使用 EcmaScript 6 进行编程

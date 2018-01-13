@@ -16,34 +16,34 @@
 
 ### 用户模块
 
-| 请求方法 |  请求路径 |     作用     | 备注 |
-|----------|-----------|--------------|------|
-| GET      | /register | 渲染注册页面 |      |
-| POST     | /register | 处理用户注册 |      |
-| GET      | /login    | 渲染登陆页面 |      |
-| POST     | /login    | 处理用户登陆 |      |
-| GET      | /logout   | 处理用户退出 |      |
+| 请求方法 | 请求路径      | 作用     | 备注   |
+| ---- | --------- | ------ | ---- |
+| GET  | /register | 渲染注册页面 |      |
+| POST | /register | 处理用户注册 |      |
+| GET  | /login    | 渲染登陆页面 |      |
+| POST | /login    | 处理用户登陆 |      |
+| GET  | /logout   | 处理用户退出 |      |
 
 ### 话题模块
 
-| 请求方法 |        请求路径        |       作用       | 备注 |
-|----------|------------------------|------------------|------|
-| GET      | /topic/new             | 渲染发布话题页面 |      |
-| GET      | /topic/new             | 渲染发布话题页面 |      |
-| GET      | /topic/:topicId        | 渲染话题详情页   |      |
-| GET      | /topic/:topicId/edit   | 渲染编辑话题页面 |      |
-| POST     | /topic/:topicId/edit   | 处理编辑话题     |      |
-| GET      | /topic/:topicId/delete | 删除话题         |      |
+| 请求方法 | 请求路径                   | 作用       | 备注   |
+| ---- | ---------------------- | -------- | ---- |
+| GET  | /topic/new             | 渲染发布话题页面 |      |
+| GET  | /topic/new             | 渲染发布话题页面 |      |
+| GET  | /topic/:topicId        | 渲染话题详情页  |      |
+| GET  | /topic/:topicId/edit   | 渲染编辑话题页面 |      |
+| POST | /topic/:topicId/edit   | 处理编辑话题   |      |
+| GET  | /topic/:topicId/delete | 删除话题     |      |
 
 ### 评论模块
 
-| 请求方法 |          请求路径          |       作用       | 备注 |
-|----------|----------------------------|------------------|------|
-| POST     | /:topicId/comment          | 处理发布评论     |      |
-| GET      | /:topicId/comment          | 获取评论列表数据 |      |
-| GET      | /comment/:commentId/edit   | 渲染编辑评论     |      |
-| POST     | /comment/:commentId/edit   | 处理编辑评论     |      |
-| GET      | /comment/:commentId/delete | 处理删除评论     |      |
+| 请求方法 | 请求路径                       | 作用       | 备注   |
+| ---- | -------------------------- | -------- | ---- |
+| POST | /:topicId/comment          | 处理发布评论   |      |
+| GET  | /:topicId/comment          | 获取评论列表数据 |      |
+| GET  | /comment/:commentId/edit   | 渲染编辑评论   |      |
+| POST | /comment/:commentId/edit   | 处理编辑评论   |      |
+| GET  | /comment/:commentId/delete | 处理删除评论   |      |
 
 ---
 

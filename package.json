@@ -1,0 +1,33 @@
+{
+  "name": "nodejs-tutorial",
+  "version": "0.0.1",
+  "description": "Node.js 入门",
+  "main": "index.html",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "docsify-cli": "^4.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "docsify serve ./ --port 5080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lipengzhou/nodejs-tutorial.git"
+  },
+  "keywords": [
+    'node',
+    'nodejs',
+    'tutorial',
+    'nodejs tutorial',
+    'node tutorial'
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lipengzhou/nodejs-tutorial/issues"
+  },
+  "homepage": "https://github.com/lipengzhou/nodejs-tutorial#readme"
+}

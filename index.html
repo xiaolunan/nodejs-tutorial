@@ -13,7 +13,6 @@
 
 <body>
   <div id="app"></div>
-  <div class="back-to-top">Top</div>
   <script src="//unpkg.com/docsify-edit-on-github@1.0.1/index.js"></script>
   <script>
     window.$docsify = {
@@ -24,30 +23,32 @@
       loadSidebar: '../_sidebar.md',
       coverpage: '../_coverpage.md',
       subMaxLevel: 2,
-      // autoHeader: true,
+      autoHeader: true,
       homepage: '../README.md',
       auto2top: true,
       plugins: [
-        EditOnGithubPlugin.create('https://github.com/lipengzhou/nodejs-tutorial/tree/master/docs')
+        EditOnGithubPlugin.create('https://github.com/lipengzhou/nodejs-tutorial/edit/master/docs/')
       ],
       search: {
         maxAge: 86400000,
         paths: 'auto',
         // 搜索标题的最大程级, 1 - 6
-        depth: 2
+        depth: 3
       }
     }
-
-    // 回到顶部
-    document.querySelector('.back-to-top').addEventListener('click', function () {
-      window.scrollTo(0, 0)
-    })
   </script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
-  <!-- Zoom image Plugin -->
+  <!-- 图片缩放 -->
   <script src="//unpkg.com/docsify/lib/plugins/zoom-image.js"></script>
+
+  <!-- 搜索 -->
   <script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
+
+  <!-- bash语法高亮 -->
   <script src="//unpkg.com/prismjs/components/prism-bash.js"></script>
+
+  <!-- 导航插件 -->
+  <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
 </body>
 
 </html>
