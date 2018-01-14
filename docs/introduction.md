@@ -1,12 +1,10 @@
 - [Node 官网](https://nodejs.org/en/)
 - [Node 中文社区](https://cnodejs.org/)
-
-
 - [维基百科 - Node.js](https://zh.wikipedia.org/wiki/Node.js)
 - [深入浅出Node.js（一）：什么是Node.js](http://www.infoq.com/cn/articles/what-is-nodejs)
 - [Node.js发展历程与版本演化](http://www.jianshu.com/p/5b9b245fcefa)
 
-## Node 是什么
+## Node.js 是什么
 
 > Node 是一个服务端环境，使用 JavaScript 进行编程
 >

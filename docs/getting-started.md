@@ -17,7 +17,6 @@
 - 确认 Node 环境是否安装成功
   - 打开命令行，输入 `node --version`
   - 或者 `node -v`
-- ​
 
 ## REPL
 
