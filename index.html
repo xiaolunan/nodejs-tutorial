@@ -17,6 +17,7 @@
   <script>
     window.$docsify = {
       name: 'Node.js 入门',
+      disqus: 'shortname',
       formatUpdated: '{YYYY}-{MM}-{DD} {HH}:{mm}:{ss}',
       repo: 'https://github.com/lipengzhou/nodejs-tutorial.git',
       basePath: './docs/',
@@ -36,6 +37,7 @@
         depth: 3
       }
     }
+
   </script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
   <!-- 图片缩放 -->
@@ -49,6 +51,10 @@
 
   <!-- 导航插件 -->
   <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  <script>
+    // 增加 bash 语法高亮别名 shell
+    Prism.languages.shell = Prism.languages.bash
+  </script>
 </body>
 
 </html>

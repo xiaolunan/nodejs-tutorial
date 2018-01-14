@@ -2,4 +2,17 @@
 
 > 更新日期：{docsify-updated}
 
-- [Node.js 脑图笔记](http://naotu.baidu.com/file/e74575e8996e96a1ecf17544e547960a?token=54fb56b9c5122f9b)
+## 本地预览
+
+```shell
+# 下载仓库到本地
+git clone https://github.com/lipengzhou/nodejs-tutorial.git
+
+# 安装依赖项
+cd nodejs-tutorial
+npm install
+
+# 启动预览服务，默认占用 5080
+# 启动成功之后在本地访问：http://localhost:5080/
+npm start
+```
