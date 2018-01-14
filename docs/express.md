@@ -1,27 +1,47 @@
-原生的 http 在某些方面表现不足以应对我们的开发需求，所以我们就需要使用框架来加快我们的开发效率，框架的目的就是提高效率，让我们的代码更高度统一。
-在 Node 中，有很多 Web 开发框架，我们这里以学习 `express` 为主。
+原生的 http 模块在某些方面表现不足以应对我们的开发需求，所以我们就需要使用框架来加快我们的开发效率，框架的目的就是提高效率，让我们的代码更高度统一。
+在 Node 中，有很多 Web 开发框架，我们这里以学习 `Express` 为主。
 
 ## Express 介绍
 
-- [Express 官方](http://expressjs.com/)
-- [Express 中文文档（非官方）](http://www.expressjs.com.cn/)
-- [Express 官方仓库](https://github.com/expressjs/express)
+- Express 是一个基于 Node.js 平台，快速、开放、极简的 web 开发框架。
 
-## 起步（Getting Started）
+
+- 作者：[tj](https://github.com/tj)
+  - [tj 个人博客](http://tjholowaychuk.com/)
+  - 知名的开源项目创建者和协作者
+  - Express、commander、ejs、co、Koa...
+  - 已经离开 Node 社区，转 Go 了
+  - [知乎 - 如何看待 TJ 宣布退出 Node.js 开发，转向 Go？](https://www.zhihu.com/question/24373004)
+- 丰富的 API 支持，强大而灵活的中间件特性
+- Express 不对 Node.js 已有的特性进行二次抽象，只是在它之上扩展了 Web 应用所需的基本功能
+- 有很多[流行框架](http://expressjs.com/en/resources/frameworks.html)基于 Express
+
+
+- [Express 官网](http://expressjs.com/)
+- [Express 中文文档（非官方）](http://www.expressjs.com.cn/)
+- [Express GitHub仓库](https://github.com/expressjs/express)
+
+
+
+## 起步
 
 ### 安装
 
 > 参考文档：http://expressjs.com/en/starter/installing.html
 
 ```shell
-# mkdir make directory 创建目录
+# 创建并切换到 myapp 目录
 mkdir myapp
 cd myapp
+
+# 初始化 package.json 文件
 npm init -y
+
+# 安装 express 到项目中
 npm i express
 ```
 
-### hello world
+### Hello World
 
 > 参考文档：http://expressjs.com/en/starter/hello-world.html
 
@@ -39,10 +59,6 @@ app.get('/', (req, res) => {
   res.send('hello world')
 })
 
-app.get('/login', (req, res) => {
-  res.send('login page')
-})
-
 // 3. 监听端口号，启动 Web 服务
 app.listen(3000, () => console.log('app listening on port 3000!'))
 ```
@@ -51,11 +67,26 @@ app.listen(3000, () => console.log('app listening on port 3000!'))
 
 > 参考文档：http://expressjs.com/en/starter/basic-routing.html
 
-- 请求方法
-- 请求路径
-- 请求处理函数
+路由（Routing）是由一个 URI（或者叫路径标识）和一个特定的 HTTP 方法（GET、POST 等）组成的，涉及到应用如何处理响应客户端请求。
 
-get:
+每一个路由都可以有一个或者多个处理器函数，当匹配到路由时，这个/些函数将被执行。
+
+路由的定义的结构如下：
+
+```javascript
+app.METHOD(PATH, HANDLER)
+```
+
+其中：
+
+- `app` 是 express 实例
+- `METHOD` 是一个 [HTTP 请求方法](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods)
+- `PATH` 是服务端路径（定位标识）
+- `HANDLER` 是当路由匹配到时需要执行的处理函数
+
+下面是一些基本示例。
+
+Respond with `Hello World!` on the homepage:
 
 ```javascript
 // 当你以 GET 方法请求 / 的时候，执行对应的处理函数
@@ -64,7 +95,7 @@ app.get('/', function (req, res) {
 })
 ```
 
-post:
+Respond to POST request on the root route (`/`), the application’s home page:
 
 ```javascript
 // 当你以 POST 方法请求 / 的时候，指定对应的处理函数
@@ -73,7 +104,25 @@ app.post('/', function (req, res) {
 })
 ```
 
-## 静态服务
+Respond to a PUT request to the `/user` route:
+
+```javascript
+app.put('/user', function (req, res) {
+  res.send('Got a PUT request at /user')
+})
+```
+
+Respond to a DELETE request to the `/user` route:
+
+```typescript
+app.delete('/user', function (req, res) {
+  res.send('Got a DELETE request at /user')
+})
+```
+
+For more details about routing, see the [routing guide](http://expressjs.com/en/guide/routing.html).
+
+## 处理静态资源
 
 > 参考文档：http://expressjs.com/en/starter/static-files.html
 
@@ -137,6 +186,8 @@ app.set('views', 目录路径)
 ## 在 Express 获取表单 POST 请求体数据
 
 > 参考文档：
+>
+> - [GitHub - body-parser](https://github.com/expressjs/body-parser)
 
 在 Express 中没有内置获取表单 POST 请求体的 API，这里我们需要使用一个第三方包：`body-parser`。
 
@@ -213,9 +264,11 @@ req.session.foo
 
 ---
 
-## 路由使用
+## 路由
 
-> 参考文档：http://expressjs.com/en/guide/routing.html
+> 参考文档：
+>
+> - [Routing](http://expressjs.com/en/guide/routing.html)
 
 一个非常基础的路由：
 
@@ -370,3 +423,22 @@ const router = require('./router')
 
 app.use(router)
 ```
+
+## 中间件
+
+> 参考文档：
+>
+> - [Writing middleware for use in Express apps](http://expressjs.com/en/guide/writing-middleware.html)
+> - [Using middleware](http://expressjs.com/en/guide/using-middleware.html)
+
+## 错误处理
+
+> 参考文档：
+>
+> - [Error handling](http://expressjs.com/en/guide/error-handling.html)
+
+## API
+
+> 参考文档：
+>
+> - [4.x API](http://expressjs.com/en/4x/api.html)
