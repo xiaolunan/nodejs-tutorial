@@ -213,7 +213,7 @@ JavaScript 模板引擎有很多，并且他们的功能都大抵相同，但是
   - 后改名为 pug
 - nunjucks
 
-## 在 Express 获取表单 POST 请求体数据
+## 解析表单 post 请求体
 
 > 参考文档：
 >
@@ -256,7 +256,7 @@ app.use(function (req, res) {
 })
 ```
 
-## 在 Express 配置使用 `express-session` 插件
+## 使用 Session
 
 > 参考文档：https://github.com/expressjs/session
 
