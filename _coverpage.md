@@ -2,7 +2,7 @@
 
 # Node.js 入门
 
-> 李鹏周 & 传智播客
+> 李鹏周 <span style="font-size: 16px;">@<a href="http://www.itcast.cn/" target="blank">传智播客</a></span>
 
 - 联系：lpzmail@163.com
 
