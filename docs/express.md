@@ -127,32 +127,48 @@ For more details about routing, see the [routing guide](http://expressjs.com/en/
 > 参考文档：http://expressjs.com/en/starter/static-files.html
 
 ```javascript
-// /public资源
+// 开放 public 目录中的资源
+// 不需要访问前缀
 app.use(express.static('public'))
 
-// /files资源
+// 开放 files 目录资源，同上
 app.use(express.static('files'))
 
-// /public/xxx
+// 开放 public 目录，限制访问前缀
 app.use('/public', express.static('public'))
 
-// /static/xxx
+// 开放 public 目录资源，限制访问前缀
 app.use('/static', express.static('public'))
 
+// 开放 publi 目录，限制访问前缀
+// path.join(__dirname, 'public') 会得到一个动态的绝对路径
 app.use('/static', express.static(path.join(__dirname, 'public')))
 ```
 
-## 配置使用 `art-template` 模板引擎
+## 使用模板引擎
 
-Express 没有内置任何模板引擎，但是支持让你配置其它模板引擎和 Express 配合使用。
+> 参考文档：
+>
+> - [Using template engines with Express](http://expressjs.com/en/guide/using-template-engines.html)
 
-- [art-template GitHub仓库](https://github.com/aui/art-template)
-- [art-template 官方文档](https://aui.github.io/art-template/)
+我们可以使用模板引擎处理服务端渲染，但是 Express 为了保持其极简灵活的特性并没有提供类似的功能。
+
+同样的，Express 也是开放的，它支持开发人员根据自己的需求将模板引擎和 Express 结合实现服务端渲染的能力。
+
+### 配置使用 art-template 模板引擎
+
+> 参考文档：
+>
+> - [art-template 官方文档](https://aui.github.io/art-template/)
+
+这里我们以 [art-template](https://github.com/aui/art-template) 模板引擎为例演示如何和 Express 结合使用。
+
+
 
 安装：
 
 ```shell
-npm install --save art-template express-art-template
+npm install art-template express-art-template
 ```
 
 配置：
@@ -165,11 +181,12 @@ npm install --save art-template express-art-template
 app.engine('html', require('express-art-template'))
 ```
 
-使用：
+使用示例：
 
 ```javascript
 app.get('/', function (req, res) {
-  // express 默认会去项目中的 views 目录找 index.html
+  // render 方法默认会去项目的 views 目录中查找 index.html 文件
+  // render 方法的本质就是将读取文件和模板引擎渲染这件事儿给封装起来了
   res.render('index.html', {
     title: 'hello world'
   })
@@ -179,9 +196,22 @@ app.get('/', function (req, res) {
 如果希望修改默认的 `views` 视图渲染存储目录，可以：
 
 ```javascript
-// 注意：第一个参数 views 千万不要写错
+// 第一个参数 views 是一个特定标识，不能乱写
+// 第二个参数给定一个目录路径作为默认的视图查找目录
 app.set('views', 目录路径)
 ```
+
+### 其它常见模板引擎
+
+JavaScript 模板引擎有很多，并且他们的功能都大抵相同，但是不同的模板引擎也各有自己的特色。
+
+大部分 JavaScript 模板引擎都可以在 Node 中使用，下面是一些常见的模板引擎。
+
+- ejs
+- handlebars
+- jade
+  - 后改名为 pug
+- nunjucks
 
 ## 在 Express 获取表单 POST 请求体数据
 
