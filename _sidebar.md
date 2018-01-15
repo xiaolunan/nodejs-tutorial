@@ -13,7 +13,7 @@
 - **Web 开发**
 - [Web 开发](web)
 - [Express](express)
-- [Express 小案例：在线留言本](online-guestbook)
+- [小案例：在线留言本](online-guestbook)
 - [操作 MySQL 数据库](node-mysql)
 
 
