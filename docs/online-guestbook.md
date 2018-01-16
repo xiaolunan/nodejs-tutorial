@@ -1,6 +1,6 @@
 > 案例Github仓库地址：https://github.com/lipengzhou/express-guestbook-case
 
-## 一、初始化
+## 零、准备
 
 完整目录结构如下：
 
@@ -38,7 +38,7 @@ npm install express
 
 
 
-## 二、Hello World
+## 一、Hello World
 
 ```javascript
 // 0. 加载 Express
@@ -58,11 +58,11 @@ app.get('/', (req, res) => {
 app.listen(3000, () => console.log('app listening on port 3000!'))
 ```
 
-## 三、配置模板引擎
+## 二、配置模板引擎
 
 > 参见：Express - 使用模板引擎
 
-## 四、路由设计
+## 三、路由设计
 
 | 请求方法 | 请求路径     | 作用              |
 | ---- | -------- | --------------- |
@@ -84,7 +84,7 @@ app.post('/publish', function (req, res) {
 })
 ```
 
-## 五、走通页面渲染跳转
+## 四、走通页面渲染跳转
 
 ```javascript
 app.get('/', function (req, res) {
@@ -96,7 +96,7 @@ app.get('/publish', function (req, res) {
 })
 ```
 
-## 六、安装处理 Bootstrap 样式文件
+## 五、安装处理 Bootstrap 样式文件
 
 安装 `bootstrap` 到项目中：
 
@@ -110,7 +110,7 @@ npm install bootstrap
 app.use('/node_modules/', express.static('./node_modules/'))
 ```
 
-## 七、将数据库中的 post 渲染到首页
+## 六、将数据库中的 post 渲染到首页
 
 JavaScript 后台处理：
 
@@ -151,11 +151,11 @@ index.html 页面模板字符串：
 
 
 
-## 八、配置解析表单 post 请求体
+## 七、配置解析表单 post 请求体
 
 > 参见：Express - 解析表单 post 请求体
 
-## 九、处理 publish 表单提交
+## 八、处理 publish 表单提交
 
 ```javascript
 app.post('/publish', function (req, res) {
@@ -201,5 +201,5 @@ app.post('/publish', function (req, res) {
 })
 ```
 
-## 十、案例总结
+## 九、案例总结
 
