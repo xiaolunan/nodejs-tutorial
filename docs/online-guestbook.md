@@ -1,11 +1,29 @@
 > 案例Github仓库地址：https://github.com/lipengzhou/express-guestbook-case
 
-## 案例编写步骤
+## 一、初始化
 
-### 一：目录结构初始化
+完整目录结构如下：
+
+```
+.
+├── node_modules npm安装的第三方包目录，使用 npm 装包会自动创建
+├── public 页面需要使用的静态资源
+│   ├── css
+│   ├── js
+│   ├── img
+│   └── ...
+├── views 所有视图页面（只存储 html 文件）
+│   ├── publish.html
+│   └── index.html
+├── app.js 服务端程序入口文件，执行该文件会启动我们的 Web 服务器
+├── db.json 这里充当我们的数据库
+├── README.md 项目说明文档
+├── package.json 项目包说明文件，存储第三方包依赖等信息
+└── package-lock.json npm的包锁定文件，用来锁定第三方包的版本和提高npm下载速度
+```
 
 ```shell
-# 创建目录
+# 创建项目目录
 mkdir guestbook
 
 # 进入项目目录
@@ -14,11 +32,13 @@ cd guestbook
 # 初始化 package.json 文件
 npm init -y
 
-# 安装 Express 依赖
-npm i express
+# 将 Express 安装到项目中
+npm install express
 ```
 
-### 二：Hello World
+
+
+## 二、Hello World
 
 ```javascript
 // 0. 加载 Express
@@ -38,18 +58,17 @@ app.get('/', (req, res) => {
 app.listen(3000, () => console.log('app listening on port 3000!'))
 ```
 
-### 三：配置模板引擎
+## 三、配置模板引擎
 
 > 参见：Express - 使用模板引擎
 
-### 四：设计路由
+## 四、路由设计
 
-| 请求方法 | 请求路径 |        作用       |
-|----------|----------|-------------------|
-| GET      | /        | 渲染 index.html   |
-| GET      | /publish | 渲染 publish.html |
-| POST     | /publish | 处理发表留言      |
-|          |          |                   |
+| 请求方法 | 请求路径     | 作用              |
+| ---- | -------- | --------------- |
+| GET  | /        | 渲染 index.html   |
+| GET  | /publish | 渲染 publish.html |
+| POST | /publish | 处理发表留言          |
 
 ```javascript
 app.get('/', function (req, res) {
@@ -65,7 +84,7 @@ app.post('/publish', function (req, res) {
 })
 ```
 
-### 五：走通页面渲染跳转
+## 五、走通页面渲染跳转
 
 ```javascript
 app.get('/', function (req, res) {
@@ -77,17 +96,21 @@ app.get('/publish', function (req, res) {
 })
 ```
 
-### 六：安装处理 Bootstrap 样式文件
+## 六、安装处理 Bootstrap 样式文件
+
+安装 `bootstrap` 到项目中：
 
 ```shell
-npm i bootstrap
+npm install bootstrap
 ```
+
+将 `node_modules` 目录开放出来：
 
 ```javascript
 app.use('/node_modules/', express.static('./node_modules/'))
 ```
 
-### 七：将数据库中的 post 渲染到首页
+## 七、将数据库中的 post 渲染到首页
 
 JavaScript 后台处理：
 
@@ -128,11 +151,11 @@ index.html 页面模板字符串：
 
 
 
-### 八：配置解析表单 post 请求体
+## 八、配置解析表单 post 请求体
 
 > 参见：Express - 解析表单 post 请求体
 
-### 九：处理 publish 表单提交
+## 九、处理 publish 表单提交
 
 ```javascript
 app.post('/publish', function (req, res) {
@@ -178,41 +201,5 @@ app.post('/publish', function (req, res) {
 })
 ```
 
+## 十、案例总结
 
-## 目录结构
-
-```
-.
-├── node_modules npm安装的第三方包目录，使用 npm 装包会自动创建
-├── public 页面需要使用的静态资源
-│   ├── css
-│   ├── js
-│   ├── img
-│   └── ...
-├── views 所有视图页面（只存储 html 文件）
-│   ├── publish.html
-│   └── index.html
-├── app.js 服务端程序入口文件，执行该文件会启动我们的 Web 服务器
-├── db.json 这里充当我们的数据库
-├── README.md 项目说明文档
-├── package.json 项目包说明文件，存储第三方包依赖等信息
-└── package-lock.json npm的包锁定文件，用来锁定第三方包的版本和提高npm下载速度
-```
-
-## 开放静态资源
-
-## 处理展示视图页面
-
-## 配置使用 art-template 模板引擎
-
-> 参见：Express - 使用模板引擎
-
-## 首页留言列表渲染
-
-## 处理表单 post 提交
-
-> 参见：Express - 解析表单 post 请求体
-
-## 处理发表留言功能
-
-## 案例总结
