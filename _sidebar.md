@@ -29,3 +29,4 @@
 - **其它**
 - [EcmaScript 6 基础](es6-base)
 - [回调函数强化](callback)
+- [其它](other)

@@ -1,10 +1,10 @@
-#### 起步
+## 起步
 
 - 初始化
 - 安装依赖
 - 模板处理
 
-#### 路由设计
+## 路由设计
 
 | 请求方法 | 请求路径             | get 参数 | post 参数                    | 备注       |
 | ---- | ---------------- | ------ | -------------------------- | -------- |
@@ -15,7 +15,7 @@
 | POST | /studens/edit    |        | id、name、age、gender、hobbies | 处理编辑请求   |
 | GET  | /students/delete | id     |                            | 处理删除请求   |
 
-#### 提取路由模块
+## 提取路由模块
 
 router.js:
 
@@ -66,7 +66,7 @@ var router = require('./router')
 app.use(router)
 ```
 
-#### 设计操作数据的 API 文件模块
+## 设计操作数据的 API 文件模块
 
 ```javascript
 /**
@@ -107,31 +107,3 @@ exports.delete = function () {
 ```
 
 ---
-
-## 其它
-
-### nodemon
-
-在开发过程中，每次修改完代码手动重启服务器很麻烦，
-所以我们这里可以使用一个第三方命名行工具：`nodemon` 来帮我们解决这个问题。
-
-`nodemon` 是一个基于Node.js 开发的一个第三方命令行工具，我们使用的时候需要全局安装：
-
-```shell
-npm install --global nodemon
-```
-
-基本使用：
-
-```shell
-# 原来的，代码修改不会自动重启
-node app.js
-
-# 使用 nodemon ，代码改变服务器会自动重启
-nodemon app.js
-```
-
-只要是通过 `nodemon app.js` 启动的服务，则它会监视你的文件变化， 当文件发生变化的时候，自动帮你重启服务器。
-
-> 注意：该工具仅用于开发测试，不要在生产服务器中使用该命令。
-
