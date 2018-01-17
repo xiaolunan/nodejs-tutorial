@@ -1,6 +1,6 @@
+## 回调函数
+
 - [知乎 - 回调函数（callback）是什么？](https://www.zhihu.com/question/19801131)
-
-
 
 你寻求一个陌生人的帮助。
 
@@ -11,13 +11,7 @@
   - 结果：有的结果由数据，有的结果无数据
 - 当他完成打你的电话通知你（调用回调函数）
 
-
-
-
-
- 你到一个商店买东西，刚好你要的东西没有货，于是你在店员那里**留下了你的电话**，过了几天店里有货了，店员就**打了你的电话**，然后你接到电话后就到店里去取了货。在这个例子里，**你的电话号码就叫回调函数**，**你把电话留给店员就叫登记回调函数**，店里后来有货了叫做触发了回调关联的事件，**店员给你打电话叫做调用回调函数**，你到店里去取货叫做响应回调事件。回答完毕。 作者：常溪玲链接：https://www.zhihu.com/question/19801131/answer/13005983来源：知乎著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-
-
+你到一个商店买东西，刚好你要的东西没有货，于是你在店员那里**留下了你的电话**，过了几天店里有货了，店员就**打了你的电话**，然后你接到电话后就到店里去取了货。在这个例子里，**你的电话号码就叫回调函数**，**你把电话留给店员就叫登记回调函数**，店里后来有货了叫做触发了回调关联的事件，**店员给你打电话叫做调用回调函数**，你到店里去取货叫做响应回调事件。回答完毕。 作者：常溪玲链接：https://www.zhihu.com/question/19801131/answer/13005983来源：知乎著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
 我勒个去，一句话搞定的事，非得啰嗦那么多?
 
@@ -199,87 +193,11 @@ function get (url, callback) {
 
 
 
-## 示例：实现 jQuery 的 `$.post` 方法
-
-```javascript
-function post(url, data, callback) {
-  var oReq = new XMLHttpRequest();
-
-  // onload 也可以
-  oReq.onload = function () {
-    callback(oReq.responseText)
-  }
-
-  oReq.open("get", url, true)
-
-  // data 要求是一个 key=value&key=value 的格式数据
-  // jQuery 为了你方便，所以允许你传递一个对象给我，其实它还会把对象转成 key=value&key=value... 格式
-  oReq.send(data)
-}
-```
 
 
 
-## 示例：实现jQuery 的 `$.ajax` 方法
-
-```javascript
-function ajax(options) {
-  var oReq = new XMLHttpRequest();
-
-  // onload 也可以
-  oReq.onload = function () {
-    // 这里通知调用了 success
-    options.success(oReq.responseText)
-  }
-
-  oReq.open(options.type || 'get', options.url, true)
-
-  if (options.data && options.type === 'post') {
-    oReq.send(data)
-  } else {
-    oReq.send()
-  }
-}
-```
 
 
-
-## 示例：复杂需求：请求学生数据 + 所处学科数据
-
-```javascript
-function getSubjectByStuId (stuId, callback) {
-  get('./data/students.json', function (studentsData) {
-    var student = null
-    studentsData.forEach(function (item) {
-      if (item.id === stuId) {
-        student = item
-      }
-    })
-    get('./data/subjects.json', function (subjectsData) {
-      subjectsData.forEach(function (item) {
-        if (item.id === student.subject_id) {
-          // console.log(item.title)
-          callback(item.title)
-        }
-      })
-    })
-  })
-}
-
-function get (url, callback) {
-  var oReq = new XMLHttpRequest();
-
-  // onload 也可以
-  oReq.onload = function () {
-    // console.log(oReq.responseText)
-    callback(oReq.responseText)
-  }
-
-  oReq.open("get", url, true)
-
-  oReq.send()
-}
-```
 
 
 
