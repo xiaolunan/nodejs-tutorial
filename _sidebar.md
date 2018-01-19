@@ -5,7 +5,7 @@
 - [模块系统](module)
 - [包与 npm](package-npm.md)
 - [文件操作](fs)
-- [异步操作封装](callback)
+- [封装异步操作](callback)
 - [EcmaScript 6 基础语法](es6-base.md)
 
 
@@ -30,3 +30,14 @@
 
 - **开发与调试**
 - [nodemon](nodemon)
+
+
+
+- **扩展技术**
+- [爬虫](spider)
+- [Socket.IO](socketio)
+- [Electron](electron)
+
+
+
+- **发布与部署**
