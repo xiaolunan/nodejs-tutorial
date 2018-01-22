@@ -461,12 +461,97 @@ app.use(router)
 > - [Writing middleware for use in Express apps](http://expressjs.com/en/guide/writing-middleware.html)
 > - [Using middleware](http://expressjs.com/en/guide/using-middleware.html)
 
+Express 的最大特色，也是最重要的一个设计，就是中间件。一个 Express 应用，就是由许许多多的中间件来完成的。
+
+为了理解中间件，我们先来看一下我们现实生活中的自来水厂的净水流程。
+
+![自来水厂净水过程](./media/water-middleware.jpeg)
+
+在上图中，自来水厂从获取水源到净化处理交给用户，中间经历了一系列的处理环节，我们称其中的每一个处理环节就是一个中间件。这样做的目的既提高了生产效率也保证了可维护性。
+
+### 一个简单的中间件例子：打印日志
+
+```javascript
+app.get('/', (req, res) => {
+  console.log(`${req.method} ${req.url} ${Date.now()}`)
+  res.send('index')
+})
+
+app.get('/about', (req, res) => {
+  console.log(`${req.method} ${req.url} ${Date.now()}`)
+  res.send('about')
+})
+
+app.get('/login', (req, res) => {
+  console.log(`${req.method} ${req.url} ${Date.now()}`)
+  res.send('login')
+})
+```
+
+在上面的示例中，每一个请求处理函数都做了一件同样的事情：请求日志功能（在控制台打印当前请求非法、请求路径以及请求时间）。
+
+针对于这样的代码我们自然想到了封装来解决：
+
+```javascript
+app.get('/', (req, res) => {
+  // console.log(`${req.method} ${req.url} ${Date.now()}`)
+  logger(req)
+  res.send('index')
+})
+
+app.get('/about', (req, res) => {
+  // console.log(`${req.method} ${req.url} ${Date.now()}`)
+  logger(req)
+  res.send('about')
+})
+
+app.get('/login', (req, res) => {
+  // console.log(`${req.method} ${req.url} ${Date.now()}`)
+  logger(req)
+  res.send('login')
+})
+
+function logger (req) {
+  console.log(`${req.method} ${req.url} ${Date.now()}`)
+}
+```
+
+这样的做法自然没有问题，但是大家想一想，我现在只有三个路由，如果说有10个、100个、1000个呢？那我在每个请求路由函数中都手动调用一次也太麻烦了。
+
+好了，我们不卖关子了，来看一下我们如何使用中间件来解决这个简单的小功能。
+
+```javascript
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url} ${Date.now()}`)
+  next()
+})
+
+app.get('/', (req, res) => {
+  res.send('index')
+})
+
+app.get('/about', (req, res) => {
+  res.send('about')
+})
+
+app.get('/login', (req, res) => {
+  res.send('login')
+})
+
+function logger (req) {
+  console.log(`${req.method} ${req.url} ${Date.now()}`)
+}
+```
+
+上面代码执行之后我们发现任何请求进来都会先在服务端打印请求日志，然后才会执行具体的业务处理函数。那这个到底是怎么回事？
+
 ### 中间件分类
 
 - 应用程序级别中间件
 - 路由级别中间件
 - 错误处理中间件
 - 内置中间件
+- 第三方中间件
 
 ### 应用程序级别中间件
 
