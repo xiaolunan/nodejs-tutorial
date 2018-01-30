@@ -6,9 +6,10 @@
 - 掌握基本的命令行操作
 - 具有服务端开发经验更佳
 
+---
+
 ## 安装 Node 环境
 
-- 查看当前 Node 环境的版本号
 - 下载：https://nodejs.org/en/download/
   - 历史版本：https://nodejs.org/en/download/releases/
 - 安装
@@ -17,6 +18,8 @@
 - 确认 Node 环境是否安装成功
   - 打开命令行，输入 `node --version`
   - 或者 `node -v`
+
+---
 
 ## REPL
 
@@ -27,27 +30,35 @@
 
 类似于浏览器中的 Console ，可以做一些代码测试。
 
+---
+
 ## Hello World
 
-1. 创建编写 JavaScript 脚本文件
-2. 打开终端，定位到脚本文件所属目录
-3. 输入 `node 文件名` 执行对应的文件
+**1. 新建一个 hello.js 并写入以下示例代码**
+
+```javascript
+var message = 'Hello Node.js!'
+console.log(message)
+```
+
+**2. 打开命令行并定位到 `hello.js` 文件所属目录**
+
+**3. 在命令行中输入 `node hello.js` 回车执行**
 
 > 注意：
->
-> 文件名不要起名为 `node.js`
->
-> 文件名或者文件路径最好不要有中文
->
-> 文件路径或者文件名不要出现空格（如果真有空格手动加引号）
+> - 文件名不要起名为 `node.js`
+> - 文件名或者文件路径最好不要有中文
+> - 文件路径或者文件名不要出现空格
 
+---
 
-
-## Hello World: 文件读写
+## 文件读写
 
 文件读取：
 
 ```javascript
+const fs = require('fs')
+
 fs.readFile('/etc/passwd', (err, data) => {
   if (err) throw err;
   console.log(data);
@@ -57,13 +68,17 @@ fs.readFile('/etc/passwd', (err, data) => {
 文件写入：
 
 ```javascript
+const fs = require('fs')
+
 fs.writeFile('message.txt', 'Hello Node.js', (err) => {
   if (err) throw err;
   console.log('The file has been saved!');
 });
 ```
 
-## Hello World: Http 服务
+---
+
+## HTTP 服务
 
 ```javascript
 // 接下来，我们要干一件使用 Node 很有成就感的一件事儿
@@ -87,11 +102,11 @@ var server = http.createServer()
 //    注册 request 请求事件
 //    当客户端请求过来，就会自动触发服务器的 request 请求事件，然后执行第二个参数：回调处理函数
 server.on('request', function () {
-  console.log('收到客户端的请求了')
+  res.end('Hello Node.js!')
 })
 
 // 4. 绑定端口号，启动服务器
 server.listen(3000, function () {
-  console.log('服务器启动成功了，可以通过 http://127.0.0.1:3000/ 来进行访问')
+  console.log('服务器启动成功，请求访问 http://127.0.0.1:3000/')
 })
 ```
