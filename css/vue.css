@@ -1,10 +1,6 @@
-/*@import url('https://fonts.googleapis.com/css?family=Roboto+Mono|Source+Sans+Pro:300,400,600');*/
-
-/*@import url('../fonts/Roboto Mono.css');*/
-/*@import url('../fonts/Source Sans Pro.css');*/
-
-/*@import url('./Roboto Mono.css');*/
-/*@import url('./Source Sans Pro.css');*/
+/* google fonts */
+@import url('./Roboto-Mono.css');
+@import url('./Source-Sans-Pro.css');
 
 *{
   -webkit-font-smoothing: antialiased;
