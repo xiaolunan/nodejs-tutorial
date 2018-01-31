@@ -5,10 +5,9 @@
   <meta charset="UTF-8">
   <title>Document</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="description" content="Description">
+  <meta name="description" content="Node.js 入门">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <!-- <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css"> -->
-  <link rel="stylesheet" href="https://cdn.bootcss.com/docsify/4.5.7/themes/vue.css">
+  <link rel="stylesheet" href="css/vue.css">
   <link rel="stylesheet" href="css/vue.user.css">
 </head>
 
@@ -34,22 +33,15 @@
       search: {
         maxAge: 86400000,
         paths: 'auto',
-        // 搜索标题的最大程级, 1 - 6
         depth: 3
       }
     }
   </script>
-  <!-- docsify -->
-  <script src="https://cdn.bootcss.com/docsify/4.5.7/docsify.min.js"></script>
-  <!-- 图片缩放 -->
-  <script src="https://cdn.bootcss.com/docsify/4.5.7/plugins/zoom-image.min.js"></script>
-  <!-- 搜索 -->
-  <script src="https://cdn.bootcss.com/docsify/4.5.7/plugins/search.min.js"></script>
-  <!-- bash语法高亮 -->
-  <script src="//unpkg.com/prismjs/components/prism-bash.js"></script>
+  <script src="js/docsify.min.js"></script>
+  <script src="js/zoom-image.min.js"></script>
+  <script src="js/search.min.js"></script>
   <script src="js/prism-bash.js"></script>
   <script>
-    // 添加 bash 语法高亮别名 shell
     Prism.languages.shell = Prism.languages.bash
   </script>
 </body>
