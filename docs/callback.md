@@ -1,4 +1,4 @@
-## 回调函数
+## 回调函数概念
 
 - [知乎 - 回调函数（callback）是什么？](https://www.zhihu.com/question/19801131)
 
@@ -158,7 +158,7 @@ fn(function (data) {
 })
 ```
 
-## 示例：原生 `ajax` 操作
+## 示例：封装原生的 `ajax` 操作
 
 > [MDN - Using XMLHttpRequest](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest)
 
@@ -173,34 +173,6 @@ oReq.open("get", "yourFile.txt", true);
 oReq.send();
 ```
 
-## 示例：实现jQuery 的 `$.get` 方法
-
-```javascript
-function get (url, callback) {
-  var oReq = new XMLHttpRequest();
-
-  // onload 也可以
-  oReq.onload = function () {
-    // console.log(oReq.responseText)
-    callback(oReq.responseText)
-  }
-
-  oReq.open("get", url, true)
-
-  oReq.send()
-}
-```
-
-
-
-
-
-
-
-
-
-
-
 ## 示例：实现拷贝方法
 
 已知 `fs.readFile` 可以读取文件，`fs.writeFile` 可以写文件。请帮我封装一个方法：`copy`。要求调用方式如下：
@@ -210,8 +182,6 @@ copy('被复制文件', '复制到的目标文件', function (err) {
   // err 成功是 null 错误是一个 错误对象
 })
 ```
-
-
 
 ## 示例：读取文件中的 todos 列表数据
 

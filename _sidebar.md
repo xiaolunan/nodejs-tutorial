@@ -5,12 +5,7 @@
 - [模块系统](module)
 - [包与 npm](package-npm.md)
 - [文件操作](fs)
-- [封装异步操作](callback)
 - [EcmaScript 6 基础语法](es6-base.md)
-
-
-
-
 
 - **Web 开发**
 - [http 模块](web)
@@ -18,8 +13,11 @@
 - [小案例：在线留言本](online-guestbook)
 - [操作 MySQL 数据库](node-mysql)
 
-
-
+- **异步编程**
+- [回调函数](callback)
+- [Promise 对象](promise)
+- [Generator 函数](generator)
+- [async 函数](async)
 
 
 - **综合案例**
@@ -38,7 +36,3 @@
 - [爬虫](spider)
 - [Socket.IO](socketio)
 - [Electron](electron)
-
-
-
-- **发布与部署**
