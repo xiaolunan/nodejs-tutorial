@@ -1,14 +1,12 @@
 > 参考文档：https://github.com/mysqljs/mysql
 
-## Hello World
-
-安装：
+## 安装
 
 ```shell
 npm install mysql
 ```
 
-Hello World：
+## Hello World
 
 ```javascript
 var mysql      = require('mysql');
@@ -29,19 +27,64 @@ connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
 connection.end();
 ```
 
-## 封装 `db-helper`
+---
 
 ## 增删改查
 
 ### 查询
 
-### 新增
+基本查询：
 
-### 修改
+```javascript
+connection.query('SELECT * FROM `books` WHERE `author` = "David"', function (error, results, fields) {
+  // error will be an Error if one occurred during the query
+  // results will contain the results of the query
+  // fields will contain information about the returned results fields (if any)
+});
+```
+
+条件查询：
+
+```javascript
+connection.query('SELECT * FROM `books` WHERE `author` = ?', ['David'], function (error, results, fields) {
+  // error will be an Error if one occurred during the query
+  // results will contain the results of the query
+  // fields will contain information about the returned results fields (if any)
+});
+```
+
+### 添加
+
+```javascript
+var post  = {id: 1, title: 'Hello MySQL'};
+var query = connection.query('INSERT INTO posts SET ?', post, function (error, results, fields) {
+  if (error) throw error;
+  // Neat!
+});
+console.log(query.sql); // INSERT INTO posts SET `id` = 1, `title` = 'Hello MySQL'
+```
 
 ### 删除
 
-## 连接池连接
+```javascript
+connection.query('DELETE FROM posts WHERE title = "wrong"', function (error, results, fields) {
+  if (error) throw error;
+  console.log('deleted ' + results.affectedRows + ' rows');
+})
+```
+
+### 修改
+
+```javascript
+connection.query('UPDATE users SET foo = ?, bar = ?, baz = ? WHERE id = ?', ['a', 'b', 'c', userId], function (error, results, fields) {
+  if (error) throw error;
+  // ...
+})
+```
+
+---
+
+## 连接池
 
 ```javascript
 var mysql = require('mysql');
@@ -63,61 +106,5 @@ pool.getConnection(function(err, connection) {
 
     // ...
   });
-});
-```
-
-## query 方法
-
-### `.query(sqlString, callback)`
-
-```javascript
-connection.query('SELECT * FROM `books` WHERE `author` = "David"', function (error, results, fields) {
-  // error will be an Error if one occurred during the query
-  // results will contain the results of the query
-  // fields will contain information about the returned results fields (if any)
-});
-```
-
-### `.query(sqlString, values, callback)`
-
-```javascript
-connection.query('SELECT * FROM `books` WHERE `author` = ?', ['David'], function (error, results, fields) {
-  // error will be an Error if one occurred during the query
-  // results will contain the results of the query
-  // fields will contain information about the returned results fields (if any)
-});
-```
-
-另一个例子：
-
-```javascript
-connection.query('UPDATE users SET foo = ?, bar = ?, baz = ? WHERE id = ?', ['a', 'b', 'c', userId], function (error, results, fields) {
-  if (error) throw error;
-  // ...
-});
-```
-
-还可以是一个对象：
-
-```javascript
-var post  = {id: 1, title: 'Hello MySQL'};
-var query = connection.query('INSERT INTO posts SET ?', post, function (error, results, fields) {
-  if (error) throw error;
-  // Neat!
-});
-console.log(query.sql); // INSERT INTO posts SET `id` = 1, `title` = 'Hello MySQL'
-```
-
-### `.query(options, callback)`
-
-```javascript
-connection.query({
-  sql: 'SELECT * FROM `books` WHERE `author` = ?',
-  timeout: 40000, // 40s
-  values: ['David']
-}, function (error, results, fields) {
-  // error will be an Error if one occurred during the query
-  // results will contain the results of the query
-  // fields will contain information about the returned results fields (if any)
 });
 ```

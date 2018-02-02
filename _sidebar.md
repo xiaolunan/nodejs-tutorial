@@ -12,6 +12,7 @@
 - [Express](express)
 - [小案例：在线留言本](online-guestbook)
 - [操作 MySQL 数据库](node-mysql)
+- [操作 MongoDB 数据库](node-mongodb)
 
 - **异步编程**
 - [回调函数](callback)
