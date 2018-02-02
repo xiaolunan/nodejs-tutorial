@@ -86,13 +86,16 @@ connection.query('UPDATE users SET foo = ?, bar = ?, baz = ? WHERE id = ?', ['a'
 
 ## 连接池
 
+![connection-pool.png](../media/connection-pool.png)
+
 ```javascript
 var mysql = require('mysql');
 var pool  = mysql.createPool({
   host     : 'example.org',
   user     : 'bob',
   password : 'secret',
-  database : 'my_db'
+  database : 'my_db',
+  connectionLimit: 10 // 默认是 10 个
 });
 
 pool.getConnection(function(err, connection) {

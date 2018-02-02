@@ -201,5 +201,61 @@ app.post('/publish', function (req, res) {
 })
 ```
 
-## 九、案例总结
+## 九、案例优化：提取数据操作模块
+
+```javascript
+const {readFile, writeFile} = require('fs')
+
+const dbPath = './db.json'
+
+exports.getDb = getDb
+
+// 封装带来的好处：
+//    1. 可维护性
+//    2. 其次才是重用
+exports.addPost = (post, callback) => {
+  getDb((err, dbData) => {
+    if (err) {
+      return callback(err)
+    }
+    
+    // 获取数组中最后一个元素
+    const last = dbData.posts[dbData.posts.length - 1]
+    
+    // 添加数据的 id 自动增长
+    post.id = last ? last.id + 1 : 1
+
+    // 创建时间
+    post.createdAt = '2018-2-2 11:57:06'
+
+    // 将数据添加到数组中（这里还并没有持久化存储）
+    dbData.posts.push(post)
+
+    // 将 dbData 对象转成字符串持久化存储到文件中
+    const dbDataStr = JSON.stringify(dbData)
+
+    writeFile(dbPath, dbDataStr, err => {
+      if (err) {
+        return callback(err)
+      }
+
+      // Express 为 res 响应对象提供了一个工具方法：redirect 可以便捷的重定向
+      // res.redirect('/')
+      callback(null)
+    })
+  })
+}
+
+function getDb (callback) {
+  readFile(dbPath, 'utf8', (err, data) => {
+    if (err) {
+      return callback(err)
+    }
+    callback(null, JSON.parse(data))
+  })
+}
+
+```
+
+## 十、案例总结
 
