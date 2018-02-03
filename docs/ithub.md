@@ -1,45 +1,47 @@
 该案例以 Node.js 中文开源技术社区 [CNode](http://cnodejs.org/) 为原型。
 
-## 案例代码查看
+## Step 0. 创建一个远程仓库
 
-```shell
-# 下载到本地
-git clone https://github.com/lipengzhou/itcast-nodejs.git
-```
+1. 在 GitHub 上创建一个仓库 `ithub`
+2. 使用 Git 将远程仓库下载到本地 `git clone 远程仓库地址`
 
-查看所有的标签（我针对每一大步都打了标签，方便切换）：
-
-```shell
-# 查看所有标签
-git tag
-
-# 查看带有注释的标签
-# 注意：使用 git-bash 查看，因为有中文
-git tag -n
-```
-
-切换指定标签：
-
-```shell
-git checkout -f 标签名称
-
-# 例如切换到 step-2
-git checkout -f step-2
-```
-
-## 准备
+## Step 1. 初始化目录结构
 
 ```
 .
 ├── node_modules
-├── public 存储客户端页面需要的样式、js脚本、img图片等静态资源
-├── views 存储所有的视图模板文件
+├── controllers 控制器
+├── models 模型
+├── public 静态资源
+├── views 视图
 ├── app.js 应用程序启动入口
+├── config.js 应用配置文件
 ├── .gitignore Git忽略文件
 ├── package.json 项目包说明文件，用来存储项目名称，第三方包依赖等信息
 ├── package-lock.json
 └── README.md 项目说明文件
 ```
+
+在 app.js 中写入以下内容：
+
+```javascript
+const express = require('express')
+const app = express()
+
+app.get('/', (req, res) => res.send('Hello World!'))
+
+app.listen(3000, () => console.log('Example app listening on port 3000!'))
+```
+
+## 导入模板
+
+下载模板到本地：
+
+```shell
+git clone https://github.com/lipengzhou/ithub-template.git
+```
+
+将模板中的 `public` 和 `views` 拷贝到项目中。
 
 ## MVC
 
@@ -110,21 +112,6 @@ const connection = mysql.createConnection({
 
 module.exports = connection
 ```
-
-## 分支操作
-
-```shell
-# 查看所有本地分支
-git branch
-
-# 查看本地分支+远程分支
-git branch -a
-
-# 将远程分支拉到本地并切换到该分支
-git checkout -b 分支名称 origin/远程分支名称
-```
-
-
 
 ## 用户注册
 
@@ -249,5 +236,30 @@ exports.handleSignup = (req, res) => {
 
 ## 删除话题
 
+## 案例代码查看
 
+```shell
+# 下载到本地
+git clone https://github.com/lipengzhou/itcast-nodejs.git
+```
+
+查看所有的标签（我针对每一大步都打了标签，方便切换）：
+
+```shell
+# 查看所有标签
+git tag
+
+# 查看带有注释的标签
+# 注意：使用 git-bash 查看，因为有中文
+git tag -n
+```
+
+切换指定标签：
+
+```shell
+git checkout -f 标签名称
+
+# 例如切换到 step-2
+git checkout -f step-2
+```
 
