@@ -27,8 +27,11 @@
 
 
 
-- **工具**
+- **开发与测试**
 - [nodemon](nodemon)
+- [Mocha](mocha)
+- [ESLint](eslint)
+- [Prettier](prettier)
 - [yarn](yarn)
 
 

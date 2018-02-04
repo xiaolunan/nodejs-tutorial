@@ -737,8 +737,57 @@ app.use(function (err, req, res, next) {
 >
 > - [Error handling](http://expressjs.com/en/guide/error-handling.html)
 
-## API
+## 常用 API
 
 > 参考文档：
 >
 > - [4.x API](http://expressjs.com/en/4x/api.html)
+
+### express
+
+- express.json
+- express.static
+- express.Router
+- express.urlencoded()
+
+### Application
+
+- app.set
+- app.get
+- app.locals
+
+### Request
+
+- req.app
+- req.query
+- req.body
+- req.cookies
+- req.ip
+- req.hostname
+- Req.method
+- req.params
+- req.path
+- req.get()
+
+### Response
+
+- res.locals
+- res.append()
+- res.cookie()
+- res.clearCookie()
+- res.download()
+- res.end()
+- res.json()
+- res.jsonp()
+- res.redirect()
+- res.render()
+- res.send()
+- res.sendStatus()
+- res.set()
+- res.status()
+
+### Router
+
+- router.all()
+- router.METHOD()
+- router.use()
