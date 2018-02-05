@@ -5,15 +5,14 @@
 - [模块系统](module)
 - [包与 npm](package-npm.md)
 - [文件操作](fs)
+- [path 路径操作模块](./path)
 - [EcmaScript 6 基础语法](es6-base.md)
-
 - **Web 开发**
 - [http 模块](web)
 - [Express](express)
 - [小案例：在线留言本](express-guestbook-app)
 - [操作 MySQL 数据库](node-mysql)
 - [操作 MongoDB 数据库](node-mongodb)
-
 - **异步编程**
 - [回调函数](callback)
 - [Promise 对象](promise)
@@ -24,6 +23,11 @@
 - **综合案例**
 - [多人社区](ithub)
 
+
+
+
+- **其它**
+- [麻烦的文件操作路径](node-path)
 
 
 

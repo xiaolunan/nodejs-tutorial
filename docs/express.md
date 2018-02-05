@@ -488,7 +488,7 @@ app.get('/login', (req, res) => {
 })
 ```
 
-在上面的示例中，每一个请求处理函数都做了一件同样的事情：请求日志功能（在控制台打印当前请求非法、请求路径以及请求时间）。
+在上面的示例中，每一个请求处理函数都做了一件同样的事情：请求日志功能（在控制台打印当前请求方法、请求路径以及请求时间）。
 
 针对于这样的代码我们自然想到了封装来解决：
 
@@ -545,6 +545,17 @@ function logger (req) {
 
 上面代码执行之后我们发现任何请求进来都会先在服务端打印请求日志，然后才会执行具体的业务处理函数。那这个到底是怎么回事？
 
+### 中间件的组成
+
+![中间件的组成](../media/express-mw.png)
+
+中间件函数可以执行以下任何任务：
+
+- 执行任何代码
+- 修改 request 或者 response 响应对象
+- 结束请求响应周期
+- 调用下一个中间件
+
 ### 中间件分类
 
 - 应用程序级别中间件
@@ -553,7 +564,7 @@ function logger (req) {
 - 内置中间件
 - 第三方中间件
 
-### 应用程序级别中间件
+#### 应用程序级别中间件
 
 不关心请求路径：
 
@@ -632,7 +643,7 @@ app.get('/user/:id', function (req, res, next) {
 
 
 
-###路由级别中间件
+#### 路由级别中间件
 
 创建路由实例：
 
@@ -706,7 +717,7 @@ app.use('/admin', router, function (req, res) {
 
 
 
-### 错误处理中间件
+#### 错误处理中间件
 
 ```javascript
 app.use(function (err, req, res, next) {
@@ -715,9 +726,7 @@ app.use(function (err, req, res, next) {
 })
 ```
 
-
-
-### 内置中间件
+#### 内置中间件
 
 - [express.static](http://expressjs.com/en/4x/api.html#express.static) serves static assets such as HTML files, images, and so on.
 - [express.json](http://expressjs.com/en/4x/api.html#express.json) parses incoming requests with JSON payloads. **NOTE: Available with Express 4.16.0+**
@@ -727,7 +736,67 @@ app.use(function (err, req, res, next) {
 
 - https://github.com/senchalabs/connect#middleware
 
-### 第三方中间件
+#### 第三方中间件
+
+### 中间件应用
+
+#### 输出请求日志中间件
+
+>  功能：实现为任何请求打印请求日志的功能。
+
+`logger.js` 定义并导出一个中间件处理函数：
+
+```javascript
+module.exports = (req, res, next) => {
+  console.log(`${req.method} -- ${req.path}`)
+  next()
+}
+
+```
+
+`app.js` 加载使用中间件处理函数：
+
+```javascript
+app.use(logger)
+```
+
+#### 统一处理静态资源中间件
+
+> 功能：实现 express.static() 静态资源处理功能
+
+`static.js` 定义并导出一个中间件处理函数：
+
+```javascript
+const fs = require('fs')
+const path = require('path')
+
+module.exports = function static(pathPrefix) {
+  return function (req, res, next) {
+    const filePath = path.join(pathPrefix, req.path)
+    fs.readFile(filePath, (err, data) => {
+      if (err) {
+        // 继续往后匹配查找能处理该请求的中间件
+        // 如果找不到，则 express 会默认发送 can not get xxx
+        return next()
+      }
+      res.end(data)
+    })
+  }
+}
+
+```
+
+`app.js` 加载并使用 static 中间件处理函数：
+
+```javascript
+// 不限定请求路径前缀
+app.use(static('./public'))
+app.use(static('./node_modules'))
+
+// 限定请求路径前缀
+app.use('/public', static('./public'))
+app.use('/node_modules', static('./node_modules'))
+```
 
 
 
