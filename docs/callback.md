@@ -218,7 +218,7 @@ addTodo('写代码', function (err) {
 
 ---
 
-## 处理异常
+## 异常处理
 
 - try-catch
 - 回调函数 Error First
@@ -226,3 +226,8 @@ addTodo('写代码', function (err) {
 - 在自己封装的回调函数中不要自己处理错误
 - 如果有错，则把错误对象作为回调函数的第一个参数传递给回调函数
 - 错误优先：Error First
+
+## try-catch 处理异常
+
+## Callback 处理异常
+
