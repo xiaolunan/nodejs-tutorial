@@ -5,6 +5,7 @@
 - [模块系统](module)
 - [包与 npm](package-npm.md)
 - [文件操作](fs)
+- [全局成员](node-globals)
 - [path 路径操作模块](./path)
 - [EcmaScript 6 基础语法](es6-base.md)
 - **Web 开发**
