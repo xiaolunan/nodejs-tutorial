@@ -5,7 +5,7 @@
 
 ECMAScript 6.0（以下简称 ES6）是 JavaScript 语言的下一代标准，已经在 2015 年 6 月正式发布了。它的目标，是使得 JavaScript 语言可以用来编写复杂的大型应用程序，成为企业级开发语言。
 
-## EcmaScript 6 简介
+## ECMAScript 6 简介
 
 ### ECMAScript 和 JavaScript 的关系
 
@@ -15,7 +15,7 @@ ECMAScript 和 JavaScript 的关系是，前者是后者的规格，后者是前
 
 ES6 既是一个历史名词，也是一个泛指，含义是 5.1 版以后的 JavaScript 的下一代标准，涵盖了 ES2015、ES2016、ES2017 等等，而 ES2015 则是正式名称，特指该年发布的正式版本的语言标准。
 
-### EcmaScript 发展历史
+### ECMAScript 发展历史
 
 ### 部署进度
 

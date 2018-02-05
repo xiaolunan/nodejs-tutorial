@@ -37,6 +37,36 @@
 - 用户模块（自己写的）
   - 我们在文件中写的代码很多的情况下不好编写和维护，所以我们可以考虑把文件中的代码拆分到多个文件中，那这些我们自己创建的文件就是用户模块
 
+### 核心模块
+
+> 参考文档：https://nodejs.org/dist/latest-v9.x/docs/api/
+
+Node 中都以具名的方式提供了不同功能的模块，例如操作文件就是：`fs`
+
+核心模块（系统模块）由 Node 提供，使用的时候都必须根据特定的核心模块名称来加载使用。例如使用文件操作模块：`fs`
+
+```javascript
+var fs = require('fs')
+
+// fs.readFile
+// fs.writeFile
+// fs.appendFile
+```
+
+
+
+| 模块名称                                     | 作用           |
+| ---------------------------------------- | ------------ |
+| [fs](https://nodejs.org/dist/latest-v9.x/docs/api/fs.html) | 文件操作         |
+| [http](https://nodejs.org/dist/latest-v9.x/docs/api/http.html) | 网络操作         |
+| [path](https://nodejs.org/dist/latest-v9.x/docs/api/path.html) | 路径操作         |
+| [url](https://nodejs.org/dist/latest-v9.x/docs/api/url.html) | url 地址操作     |
+| [os](https://nodejs.org/dist/latest-v9.x/docs/api/os.html) | 操作系统信息       |
+| [net](https://nodejs.org/dist/latest-v9.x/docs/api/net.html) | 一种更底层的网络操作方式 |
+| [querystring](https://nodejs.org/dist/latest-v9.x/docs/api/querystring.html) | 解析查询字符串      |
+| [util](https://nodejs.org/dist/latest-v9.x/docs/api/util.html) | 工具函数模块       |
+| ...                                      | ...          |
+
 ## 模块通信之输入 `require`
 
 ```javascript

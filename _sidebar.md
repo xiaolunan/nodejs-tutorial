@@ -7,7 +7,7 @@
 - [文件操作](fs)
 - [全局成员](node-globals)
 - [path 路径操作模块](./path)
-- [EcmaScript 6 基础语法](es6-base.md)
+- [ECMAScript 6 基础语法](es6-base.md)
 - **Web 开发**
 - [http 模块](web)
 - [Express](express)
@@ -35,7 +35,7 @@
 - **开发与测试**
 - [nodemon](nodemon)
 - [Mocha](mocha)
-- [代码风格](node-code-style)
+- [JavaScript 代码风格](js-code-style)
 - [ESLint](eslint)
 - [Prettier](prettier)
 - [yarn](yarn)
