@@ -2,7 +2,7 @@
 
 > 更新日期：{docsify-updated}
 
-这是一本 Node.js 入门教程，仅适合 Node.js 入门新手er。
+这是一本 Node.js 入门教程，仅适合初接触 Node.js 的新手er，希望能帮助到你。
 
 虽然还没写完，请允许我先说一些获奖感言。
 
