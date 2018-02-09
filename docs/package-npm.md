@@ -256,3 +256,14 @@ npm 5 以后才加入了这个文件。
   - 我们的目的就是希望可以锁住 1.1.1 这个版本
   - 所以这个 `package-lock.json` 这个文件的另一个作用就是锁定版本号，防止自动升级新版
 
+
+## dependencies 和 devDependencies
+
+- `--save` 会保存到 `dependencies` 依赖项中
+- `--save-dev` 会保存到 `devDependencies` 依赖项中
+
+我们把一些辅助开发的工具包安装到 `devDependencies` 中。这样做的目的是对包进行分类，项目上线的时候可以使用 `npm install --production` 命令只安装 `dependencies` 依赖项中的包。
+
+##  npm scri pts
+
+> 学习参考：http://www.ruanyifeng.com/blog/2016/10/npm_scripts.html

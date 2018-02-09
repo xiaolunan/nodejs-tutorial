@@ -738,6 +738,31 @@ app.use(function (err, req, res, next) {
 
 #### 第三方中间件
 
+> 官方中间件资源：http://expressjs.com/en/resources/middleware.html
+
+早期的 Express 内置了很多中间件。后来 Express 在 4.x 之后移除了这些内置中间件，官方把这些功能性中间件以包的形式单独提供出来。这样做的目的是为了保持 Express 本身极简灵活的特性，开发人员可以根据自己的需求去灵活的定制。下面是官方提供的一些常用的中间件解决方案。
+
+| Middleware module                        | Description                              | Replaces built-in function (Express 3) |
+| ---------------------------------------- | ---------------------------------------- | -------------------------------------- |
+| [body-parser](http://expressjs.com/en/resources/middleware/body-parser.html) | Parse HTTP request body. See also: [body](https://github.com/raynos/body), [co-body](https://github.com/visionmedia/co-body), and [raw-body](https://github.com/stream-utils/raw-body). | express.bodyParser                     |
+| [compression](http://expressjs.com/en/resources/middleware/compression.html) | Compress HTTP responses.                 | express.compress                       |
+| [connect-rid](http://expressjs.com/en/resources/middleware/connect-rid.html) | Generate unique request ID.              | NA                                     |
+| [cookie-parser](http://expressjs.com/en/resources/middleware/cookie-parser.html) | Parse cookie header and populate `req.cookies`. See also [cookies](https://github.com/jed/cookies) and [keygrip](https://github.com/jed/keygrip). | express.cookieParser                   |
+| [cookie-session](http://expressjs.com/en/resources/middleware/cookie-session.html) | Establish cookie-based sessions.         | express.cookieSession                  |
+| [cors](http://expressjs.com/en/resources/middleware/cors.html) | Enable cross-origin resource sharing (CORS) with various options. | NA                                     |
+| [csurf](http://expressjs.com/en/resources/middleware/csurf.html) | Protect from CSRF exploits.              | express.csrf                           |
+| [errorhandler](http://expressjs.com/en/resources/middleware/errorhandler.html) | Development error-handling/debugging.    | express.errorHandler                   |
+| [method-override](http://expressjs.com/en/resources/middleware/method-override.html) | Override HTTP methods using header.      | express.methodOverride                 |
+| [morgan](http://expressjs.com/en/resources/middleware/morgan.html) | HTTP request logger.                     | express.logger                         |
+| [multer](http://expressjs.com/en/resources/middleware/multer.html) | Handle multi-part form data.             | express.bodyParser                     |
+| [response-time](http://expressjs.com/en/resources/middleware/response-time.html) | Record HTTP response time.               | express.responseTime                   |
+| [serve-favicon](http://expressjs.com/en/resources/middleware/serve-favicon.html) | Serve a favicon.                         | express.favicon                        |
+| [serve-index](http://expressjs.com/en/resources/middleware/serve-index.html) | Serve directory listing for a given path. | express.directory                      |
+| [serve-static](http://expressjs.com/en/resources/middleware/serve-static.html) | Serve static files.                      | express.static                         |
+| [session](http://expressjs.com/en/resources/middleware/session.html) | Establish server-based sessions (development only). | express.session                        |
+| [timeout](http://expressjs.com/en/resources/middleware/timeout.html) | Set a timeout period for HTTP request processing. | express.timeout                        |
+| [vhost](http://expressjs.com/en/resources/middleware/vhost.html) | Create virtual domains.                  | express.vhost                          |
+
 ### 中间件应用
 
 #### 输出请求日志中间件

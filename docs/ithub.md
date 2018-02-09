@@ -139,3 +139,7 @@ git checkout -f 标签名称
 git checkout -f step-2
 ```
 
+## 使用 markdown 富文本编辑器
+
+- https://github.com/lepture/editor
+

@@ -2,7 +2,7 @@
 
 > 更新日期：{docsify-updated}
 
-这是一本 Node.js 入门教程，仅适合初接触 Node.js 的新手er，希望能帮助到你。
+这是一本 Node.js 入门教程，仅适合初接触 Node.js 的新手er，希望能够帮助到你。
 
 - 感谢这个美好的时代和我们的社会主义现代化国家:joy:
 - 感谢我的公司[传智播客](http://www.itcast.cn/)
