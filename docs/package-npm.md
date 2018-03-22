@@ -35,33 +35,43 @@ npm install --global npm
 
 ## 常用命令
 
-- `npm init`
-  - `npm init -y` 可以跳过向导，快速生成，随后可以自己手动改文件
-- `npm install`
-  - 一次性把 dependencies 选项中的依赖项全部安装
-  - npm i
-- `npm install 包名 [包名]...`
-  - npm 5 以前只下载，不会保存依赖信息，如果需要保存，则需要加上 `--save` 选项
-  - `npm i 包名`
-- `npm install 报名@版本号`
-- `npm install --save 包名`
-  - 下载并且保存依赖项（package.json 文件中的 dependencies 选项）
-  - npm i -S 包名
-- `npm uninstall 包名`
-  - npm 5 以前只删除，如果有依赖项会依然保存
-  - npm 5 以后会自动移除依赖信息
-  - npm un 包名
-- `npm uninstall --save 包名`
-  - 删除的同时也会把依赖信息也去除
-  - npm un -S 包名
-- npm install --global 包名
-  - 不是安装到项目中
-  - 而是安装到全局（肯定在计算机里面）
-- `npm help`
-  - 查看使用帮助
-- `npm 命令 --help`
-  - 查看指定命令的使用帮助
-  - 例如我忘记了 uninstall 命令的简写了，这个时候，可以输入 `npm uninstall --help` 来查看使用帮助
+```shell
+# 在项目中初始化一个 package.json 文件
+# 凡是使用 npm 来管理的项目都会有这么一个文件
+npm init
+
+# 跳过向导，快速生成 package.json 文件
+# 简写是 -y
+npm init --yes
+
+# 一次性安装 dependencies 中所有的依赖项
+# 简写是 npm i
+npm install
+
+# 安装指定的包，可以简写为 npm i 包名
+# npm 5 以前只下载，不会保存依赖信息，如果需要保存，则需要加上 `--save` 选项
+# npm 5 以后就可以省略 --save 选项了
+npm install 包名
+
+# 一次性安装多个指定包
+npm install 包名 包名 包名 ...
+
+# 安装指定版本的包
+npm install 包名@版本号
+
+# 卸载指定的包
+npm uninstall 包名
+
+# 安装全局包
+npm install --global 包名
+
+# 查看使用帮助
+npm help
+
+# 查看某个命令的使用帮助
+# 例如我忘记了 uninstall 命令的简写了，这个时候，可以输入 `npm uninstall --help` 来查看使用帮助
+npm 命令 --help
+```
 
 ## npm 安装全局包
 
