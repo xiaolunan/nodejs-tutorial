@@ -12,6 +12,7 @@
 - [http 模块](web)
 - [Express](express)
 - [小案例：在线留言本](express-guestbook-app)
+- [41期在线留言本案例](41期留言本案例)
 - [操作 MySQL 数据库](node-mysql)
 - [操作 MongoDB 数据库](node-mongodb)
 - **异步编程**
