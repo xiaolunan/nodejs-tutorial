@@ -454,6 +454,79 @@ const router = require('./router')
 app.use(router)
 ```
 
+---
+
+## 在 Express 中获取客户端请求参数的三种方式
+
+例如，有一个地址：`/a/b/c?foo=bar&id=123`
+
+### 查询字符串参数
+
+获取 `?foo=bar&id=123`
+
+```javascript
+console.log(req.query)
+```
+
+结果如下：
+
+```javascript
+{
+  foo: 'bar',
+  id: '123'
+}
+```
+
+### 请求体参数
+
+`POST` 请求才有请求体，我们需要单独配置 `body-parser` 中间件才可以获取。
+只要程序中配置了 `body-parser` 中间件，我们就可以通过 `req.body` 来获取表单 `POST` 请求体数据。
+
+```
+req.body
+// => 得到一个请求体对象
+```
+
+### 动态的路径参数
+
+在 Express 中，支持把一个路由设计为动态的。例如：
+
+```javascript
+// /users/:id 要求必须以 /users/ 开头，:id 表示动态的，1、2、3、abc、dnsaj 任意都行
+// 注意：:冒号很重要，如果你不加，则就变成了必须 === /users/id
+// 为啥叫 id ，因为是动态的路径，服务器需要单独获取它，所以得给它起一个名字
+// 那么我们就可以通过 req.params 来获取路径参数
+app.get('/users/:id', (req, res, next) => {
+  console.log(req.params.id)
+})
+
+// /users/*/abc
+// req.params.id
+app.get('/users/:id/abc', (req, res, next) => {
+  console.log(req.params.id)
+})
+
+// /users/*/*
+// req.params.id
+// req.params.abc
+app.get('/users/:id/:abc', (req, res, next) => {
+  console.log(req.params.id)
+})
+
+// /*/*/*
+// req.params.users
+app.get('/:users/:id/:abc', (req, res, next) => {
+  console.log(req.params.id)
+})
+
+// /*/id/*
+app.get('/:users/id/:abc', (req, res, next) => {
+  console.log(req.params.id)
+})
+```
+
+---
+
 ## 中间件
 
 > 参考文档：
