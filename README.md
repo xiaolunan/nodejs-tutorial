@@ -1,7 +1,14 @@
-# Node.js 入门
-
-> 更新日期：{docsify-updated}
-
-这是一本 Node.js 入门教程，仅适合初接触 Node.js 的新手er，希望能够帮助到你。
-
-本教程还在不断更新和完善中，有任何意见或建议欢迎给我提 [Issues](https://github.com/lipengzhou/nodejs-tutorial/issues) ，感谢支持。
+---
+home: true
+heroImage: /hero.png
+actionText: 快速上手 →
+actionLink: /zh/guide/
+features:
+- title: 简洁至上
+  details: 以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。
+- title: Vue驱动
+  details: 享受 Vue + webpack 的开发体验，在 Markdown 中使用 Vue 组件，同时可以使用 Vue 来开发自定义主题。
+- title: 高性能
+  details: VuePress 为每个页面预渲染生成静态的 HTML，同时在页面被加载的时候，将作为 SPA 运行。
+footer: MIT Licensed | Copyright © 2018-present Evan You
+---

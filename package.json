@@ -1,33 +1,20 @@
 {
   "name": "nodejs-tutorial",
-  "version": "0.0.1",
-  "description": "Node.js 入门",
-  "main": "index.html",
-  "directories": {
-    "doc": "docs"
-  },
+  "version": "1.0.0",
+  "repository": "https://github.com/lipengzhou/nodejs-tutorial.git",
+  "author": "lipengzhou <lpzmail@163.com>",
+  "license": "MIT",
   "dependencies": {
-    "docsify-cli": "^4.2.0"
+    "vuepress": "^1.0.0-alpha.19"
   },
-  "devDependencies": {},
   "scripts": {
-    "start": "docsify serve ./ --port 5080"
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "start": "npm run docs:dev"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lipengzhou/nodejs-tutorial.git"
-  },
-  "keywords": [
-    "node",
-    "nodejs",
-    "tutorial",
-    "nodejs tutorial",
-    "node tutoria"
-  ],
-  "author": "lipengzhou",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/lipengzhou/nodejs-tutorial/issues"
-  },
-  "homepage": "https://github.com/lipengzhou/nodejs-tutorial#readme"
+  "devDependencies": {
+    "@vuepress/plugin-back-to-top": "^1.0.0-alpha.0",
+    "@vuepress/plugin-medium-zoom": "^1.0.0-alpha.0",
+    "@vuepress/plugin-pagination": "^1.0.0-alpha.0"
+  }
 }
