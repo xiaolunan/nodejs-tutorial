@@ -1,10 +1,18 @@
-# Web 开发
+# 第7章 Web 开发
 
 > 目标
 >
 > - HTTP 协议
 
 在 Node 中需要使用 `http` 核心模块来构建 Web 服务器。
+
+## 浏览器的本质作用
+
+- 收发数据
+- 包装和解析 HTTP 报文数据
+- 渲染 HTML、CSS，解析执行 JavaScript
+
+## HTTP 协议
 
 ## ip 地址和端口号
 

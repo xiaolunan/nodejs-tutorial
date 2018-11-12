@@ -1,4 +1,11 @@
-# 模块系统
+# 第4章 模块系统
+
+当你的网站开发越来越复杂代码越来越多的时候会经常遇到什么问题？
+
+- 恼人的命名冲突
+- 繁琐的文件依赖
+
+历史上，JavaScript一直没有模块（module）体系， 无法将一个大程序拆分成互相依赖的小文件，再用简单的方法拼装起来。 其他语言都有这项功能，比如Ruby的 `require`、Python的 `import` ， 甚至就连CSS都有 `@import` ， 但是JavaScript任何这方面的支持都没有，这对开发大型的、复杂的项目形成了巨大障碍。
 
 ## 什么是模块化
 
@@ -43,6 +50,15 @@
 
 > 参考文档：https://nodejs.org/dist/latest-v9.x/docs/api/
 
+- 核心模块就是 node 内置的模块，需要通过唯一的标识名称来进行获取。
+- 每一个核心模块基本上都是暴露了一个对象，里面包含一些方法供我们使用
+- 一般在加载核心模块的时候，变量的起名最好就和核心模块的标识名同名即可
+  + 例如：`const fs = require('fs')`
+- 核心模块本质上也是文件模块
+  + 核心模块已经被编译到了 node 的可执行程序，一般看不到
+  + 可以通过查看 node 的源码看到核心模块文件
+  + 核心模块也是基于 CommonJS 模块规范
+
 Node 中都以具名的方式提供了不同功能的模块，例如操作文件就是：`fs`
 
 核心模块（系统模块）由 Node 提供，使用的时候都必须根据特定的核心模块名称来加载使用。例如使用文件操作模块：`fs`
@@ -68,6 +84,25 @@ var fs = require('fs')
 | [querystring](https://nodejs.org/dist/latest-v9.x/docs/api/querystring.html) | 解析查询字符串      |
 | [util](https://nodejs.org/dist/latest-v9.x/docs/api/util.html) | 工具函数模块       |
 | ...                                      | ...          |
+
+### 文件模块
+
+以 `./` 或 `../` 开头的模块标识就是文件模块，一般就是用户编写的。
+
+### 第三方模块
+
+一般就是通过 `npm install` 安装的模块就是第三方模块。
+
+加载规则如下：
+
+- 如果不是文件模块，也不是核心模块
+- node 会去 node_modules 目录中找（找跟你引用的名称一样的目录），例如这里 `require('underscore')`
+- 如果在 node_modules 目录中找到 `underscore` 目录，则找该目录下的 `package.json` 文件
+- 如果找到 `package.json` 文件，则找该文件中的 `main` 属性，拿到 main 指定的入口模块
+- 如果过程都找不到，node 则取上一级目录下找 `node_modules` 目录，规则同上。。。
+- 如果一直找到代码文件的根路径还找不到，则报错。。。
+
+注意：对于第三方模块，我们都是 `npm install` 命令进行下载的，就放到项目根目录下的 `node_modules` 目录。
 
 ## 模块通信之输入 `require`
 

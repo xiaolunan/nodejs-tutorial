@@ -1,4 +1,4 @@
-# 二、Node.js 介绍
+# 第2章 Node.js 介绍
 
 ## Node.js 是什么
 
@@ -78,7 +78,18 @@ Ryan Dahl经过两年的工作后，成为了高性能Web服务器的专家，�
 
 以上就是**Node.js项目的由来，是一个专注于实现高性能Web服务器优化的专家，几经探索，几经挫折后，遇到V8而诞生的项目**。
 
-
+- 2009年5月，Ryan Dahl 在 github 上发布了最初的 Node 版本
+- 2010年底，Ryan Dahl 加入 Joyent 公司全职负责 Node 的发展
+- 2011年7月，Node 在微软的支持下发布了 Windows 版
+- 2012年1月底，Ryan Dahl 将掌门人身份转交给了 Isaac Z.Schlueter，自己转向一些研究项目
+- 2014年12月，多为重量级Node开发者不满 Joyent 对 Node 的管理，自立门户创建了 `io.js`
+- 2015年9月，Node 与 io.js 合并，Node 的版本从 0.12.7 直接升级到了 4.0.0
+- 合并后的 io.js 和 Node 在 Joyent 公司的维护下并行了两个版本：
+  - 一个是4.x.x 还是原来的 Node，这个版本是稳定版
+  - 一个是5.x.x，目前已经更新到了 6.8.1，其实就是 io.js，最新特性版，不建议生产环境使用
+- Node 计划在 2016 年 10月底正式发布 Node 7.0
+  - 7.0 已经最大限度的支持了很多的 ES6 新语法
+  - 而且提高了整体的执行性能，提供了一些别的API
 
 Node 各个重要版本发展阶段：
 
@@ -108,6 +119,9 @@ Node 各个重要版本发展阶段：
 
 ## Node 能做什么
 
+> - Node 打破了过去 JavaScript 只能在浏览器中运行的局面
+> - 前后端编程环境统一，大大降低了前后端语言切换的代价
+>
 > [知乎 - JavaScript能做什么，该做什么？](https://www.zhihu.com/question/20796866)
 > Atwood's Law: any application that can be written in JavaScript, will eventually be written in JavaScript.
 > 凡是能用 JavaScript 写出来的，最终都会用 JavaScript写出来。
@@ -132,6 +146,12 @@ Node 各个重要版本发展阶段：
 - Ecmascript 6
 - ...
 
+## 结语
+
+JavaScript 长久以来一直被限制在浏览器的沙箱中运行， 它的能力取决于浏览器中间层提供的支持多少。 Node 将高性能的 V8 带到了服务器端，使 JavaScript 也可以开发出实时高性能的服务器。 在 Node 中，不再与CSS样式表，DOM树打交道， 可以随意的访问本地文件，搭建 WebSocket 服务器，连接数据库等系统级底层操作。 Node 不处理 UI，只关心数据，无论是本地数据还是网络数据。 前后端编程统一，大大降低了前后端编程切换的代码。
+
+对于前端工程师而言，自己熟悉的 JavaScript 如今竟然可以在另一个地方大放异彩， 不谈其他原因，仅仅因为好奇，也值得去关注和探究它。
+
 ## 相关链接
 
 - [Node.js 官方文档](https://nodejs.org/en/docs/)
@@ -146,3 +166,4 @@ Node 各个重要版本发展阶段：
 - [EcmaScript 6 入门](http://es6.ruanyifeng.com/)
 - [七天学会 NodeJS](https://github.com/nqdeng/7-days-nodejs)
 - ......
+

@@ -794,10 +794,6 @@
   dependencies:
     medium-zoom "^0.4.0"
 
-"@vuepress/plugin-pagination@^1.0.0-alpha.0":
-  version "1.0.0-alpha.0"
-  resolved "http://registry.npm.taobao.org/@vuepress/plugin-pagination/download/@vuepress/plugin-pagination-1.0.0-alpha.0.tgz#96f6e402a1147b34c2feaa930d913be5295e29c6"
-
 "@vuepress/plugin-register-components@^1.0.0-alpha.19":
   version "1.0.0-alpha.19"
   resolved "http://registry.npm.taobao.org/@vuepress/plugin-register-components/download/@vuepress/plugin-register-components-1.0.0-alpha.19.tgz#71c81c21481304e6195d4dc3d5c2f5ab0aecff2c"

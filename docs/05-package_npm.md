@@ -1,4 +1,4 @@
-# 包与npm
+# 第5章 包与npm
 
 ## npm
 
@@ -153,7 +153,9 @@ npm root -g
 
 ## 解决 npm 被墙问题
 
-> 参考文档：http://npm.taobao.org/
+- `npm install jquery --registry=https://registry.npm.taobao.org`
+- `npm config set registry https://registry.npm.taobao.org`
+- [nrm](https://github.com/Pana/nrm)
 
 npm 存储包文件的服务器在国外，有时候会被墙，速度很慢，所以我们需要解决这个问题。
 
