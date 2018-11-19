@@ -1,18 +1,21 @@
 # 第10章 使用数据库存储网站数据
 
-> 产出基于数据库的网站
+**学习目标**
 
-## 学习目标
+- 使用 mysql 包操作 MySQL 数据库
+- 使用数据库的动态网站
 
-> 参考文档：https://github.com/mysqljs/mysql
 
-## 安装
+
+## 使用 mysql 包
+
+### 安装
 
 ```shell
 npm install mysql
 ```
 
-## Hello World
+### Hello World
 
 ```javascript
 var mysql      = require('mysql');
@@ -35,9 +38,9 @@ connection.end();
 
 ---
 
-## 增删改查
+### 增删改查
 
-### 查询
+#### 查询
 
 基本查询：
 
@@ -59,7 +62,7 @@ connection.query('SELECT * FROM `books` WHERE `author` = ?', ['David'], function
 });
 ```
 
-### 添加
+#### 添加
 
 ```javascript
 var post  = {id: 1, title: 'Hello MySQL'};
@@ -70,7 +73,7 @@ var query = connection.query('INSERT INTO posts SET ?', post, function (error, r
 console.log(query.sql); // INSERT INTO posts SET `id` = 1, `title` = 'Hello MySQL'
 ```
 
-### 删除
+#### 删除
 
 ```javascript
 connection.query('DELETE FROM posts WHERE title = "wrong"', function (error, results, fields) {
@@ -79,7 +82,7 @@ connection.query('DELETE FROM posts WHERE title = "wrong"', function (error, res
 })
 ```
 
-### 修改
+#### 修改
 
 ```javascript
 connection.query('UPDATE users SET foo = ?, bar = ?, baz = ? WHERE id = ?', ['a', 'b', 'c', userId], function (error, results, fields) {
@@ -90,7 +93,7 @@ connection.query('UPDATE users SET foo = ?, bar = ?, baz = ? WHERE id = ?', ['a'
 
 ---
 
-## 连接池
+### 连接池
 
 ![connection-pool.png](./assets/connection-pool.png)
 
@@ -118,7 +121,7 @@ pool.getConnection(function(err, connection) {
 });
 ```
 
-## 封装 dbHelper.js
+### 封装 dbHelper.js
 
 ```javascript
 const mysql = require('mysql')
@@ -151,5 +154,5 @@ exports.query = (...args) => {
 
 ```
 
-
 ## 结合数据库的网站
+

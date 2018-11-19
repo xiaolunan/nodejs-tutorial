@@ -1,5 +1,11 @@
 # 第2章 Node.js 介绍
 
+**学习目标**
+
+- 知道 Node.js 是什么
+- 理解 Node.js 的运行原理
+- 了解Node.js的运行机制
+
 ## Node.js 是什么
 
 以下引自 [Node.js 官网](https://nodejs.org/en/)：
@@ -167,3 +173,4 @@ JavaScript 长久以来一直被限制在浏览器的沙箱中运行， 它的�
 - [七天学会 NodeJS](https://github.com/nqdeng/7-days-nodejs)
 - ......
 
+## 总结

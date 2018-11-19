@@ -1,6 +1,11 @@
 # 第1章 服务端开发基础
 
-![client-server](./assets/client-server.png)
+**学习目标**
+
+- 什么是服务器
+- 什么是 Web 服务器
+- IP、DNS、端口号的作用
+- 命令行的使用
 
 ## 在浏览器输入一个地址到看到网站内容经历了什么
 
@@ -20,19 +25,104 @@
 12. 如果在解析的过程（从上到下）中，发现有外链的标签（link、css、img）
 13. 浏览器会自动对该标签指向的 路径地址 发起新的请求，同上。
 
+## 命令行基础
+
+> 图形用户界面让简单的任务更容易完成，而命令行界面 使完成复杂的任务成为可能
+
+![shell](./assets/shell.jpg)
+
+当使用图形用户界面时，我们需要另一个和 shell 交互的叫做终端仿真器的程序。 在 Windows 上，一般使用操作系统自带的 `cmd` 或者 `powershell`。 在 Linux 上，如果是图形用户界面，那么可以使用 `terminal` 或者 `konsole`、`gnome-terminal`之类 的终端仿真器，但基本上，它们都完成同样的事情，让我们能访问 shell， 你可能会因为附加的一些花俏功能而喜欢上某个终端。
 
 
-![æ°æ®ä¼ è¾](./assets/数据传输.png)
 
-DNS：
-
-![dnslookups](./assets/dnslookups.png)
+关于名字，如果有人提到：控制台、终端、bash、shell、terminal 等，一般都是指上面这些。
 
 
 
-请求和响应：
+打开命令行
 
-![è¯·æ±åååº](./assets/request_response5b35d.png)
+- 方式一：开始菜单搜索 `cmd`
+- 方式二：`win` + `r` 输入 `cmd`
+
+常用命令
+
+- pwd（print working directory）
+- cd（change directory）
+  - 切换到指定路径（相对路径或绝对路径）
+- ls（list files）
+  - `ls` 列出当前目录文件
+  - `ls 目录路径` 列出指定路径文件
+  - `ls -a` 列出文件并显示隐藏文件或目录
+- cp（copy）
+  - `cp 源路径 目标路径`
+  - cp 在复制目录的时候，不会复制里面的子文件或子目录
+  - -r （recursive）递归复制
+- mv（move）：移动文件或者目录，还可以重命名文件或目录
+- mkdir（make directory）：创建目录
+- rm（remove）：删除文件或目录
+  - -rf 递归删除：直接将整个目录包括里面的内容都删掉
+- rmdir 目录名称
+  - 只能删除空目录
+- clear：清屏
+- touch 文件名
+  - 根据文件名创建新的文件
+- cat 文件名
+  - 查看指定的文本文件
+
+```bash
+# print working directory 打印当前工作目录
+pwd
+
+# change directory 切换目录
+cd
+
+# 回到上一级目录
+cd ..
+
+# directory 列出当前目录列表
+dir
+
+# 列出指定路径的目录列表
+dir 目录路径
+
+# copy 拷贝
+cp 源 目标
+
+# list files 列出目录列表
+# 同 dir，仅适用于类 Unix 操作系统
+ls
+
+# 创建目录
+mkdir
+
+# 删除文件
+remove
+
+# 清屏
+clear
+```
+
+退出命令行
+
+- 直接关闭即可
+- 或者输入 `exit` 也可以退出
+
+
+
+命令行练习
+
+```
+1. 在桌面下创建一个叫做 `itcast` 的目录
+2. 在 itcast 目录下，分别创建 `dir1` 和 `dir2` 两个子目录
+3. 复制 `code/scripts/main.js` 文件到 `itcast` 目录中
+4. 复制 `code` 目录下的 `js` 目录到 `itcast` 目录中
+5. 将 `itcast/main.js` 文件重命名为 `main-main.js`
+6. 将 `main-main.js` 文件移动到 dir1 中
+7. 将 `dir1` 中的 `main-main.js` 文件移动到 dir2 中
+8. 将 `itcast/js` 目录删除
+```
+
+以后多使用，就会越用越熟。
 
 ## 建立你的第一个网站（目标）
 
@@ -336,66 +426,8 @@ $ httpd.exe -k stop -n "Apache"
 
 这里我们选择 PHP 作为我们了解服务端动态网页开发的技术方案，注意：我们学习的重心不在 PHP，而是了解服务端开发，以及某些其他对前端开发有帮助的东西。
 
-### 配置 PHP 支持
-
-> PHP 文件的扩展名就是 `.php`
-
-我们可以尝试在刚刚配置的网站中添加一个扩展名为 `php` 的文件，然后到浏览器中访问它。
-
-```php
-<!-- demo.php -->
-<?php echo 'Hello PHP'; ?>
-```
-
-结果出乎意料，并没有显示我们想要的 `Hello PHP`，而是将我们的代码原封不动的返回给浏览器了。
-
-![1506004529597](media/1506004529597.png)
-
-原因很简单：Apache 只能处理静态文件请求，对于后缀名为 `.php` 这种动态文件，它无法执行，所以就当成是一个静态文件直接返回了。
-
-**解决方法**：
-
-- 在服务器上安装 PHP
-
-  - 解压 php 到纯英文路径目录中
-
-- 在 Apache 中添加支持 PHP 的配置
-
-  - 在 Apache 添加 PHP 处理模块
-
-    ```ini
-    # php support
-    LoadModule php7_module C:/Develop/php/php7apache2_4.dll
-    ```
-
-  - 在 `<IfModule mime_module>` 节点中添加 `.php` 扩展名解析支持
-
-    ```ini
-    # parse .php files
-    AddType application/x-httpd-php .php
-    ```
-
-  - 默认文档配置节点 `<IfModule dir_module>` 中添加 `index.php`
-
-    > 默认文档指的是在访问一个目录而不是具体文件名时，默认执行的文件名
-
-    ```ini
-    <IfModule dir_module>
-        DirectoryIndex index.html index.php
-    </IfModule>
-    ```
-
-    ​
-
-- 重启 Apache
-
-![apache-php](media/apache-php.png)
-
-> 可以理解成 Apache 是一家没有太多能力的公司，只能处理一些简单的业务，但是心很大想做更多的事，所以就想到了外包，所有额外的业务都需要外包给其他程序（而 PHP 就是一个专门能处理 php 这个业务的外包公司）
-
 ## 作业
 
 - 安装 Apache 并配置，确保本机可以访问。
 - 同桌相互访问对方提供的 Web 服务。
-- 让 Apache 支持 php 文件的运行。
 
