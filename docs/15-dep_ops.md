@@ -9,6 +9,29 @@
 
 ## 发布
 
+## pm2
+
+安装
+
+```bash
+yarn global add pm2
+
+# 或者
+npm install pm2 -g
+```
+
+常用命令
+
+```bash
+pm2 start app
+pm2 ls
+pm2 delete xxx
+pm2 stop app
+pm2 restart app
+```
+
+
+
 ## 更新
 
 ## 持续集成

@@ -1,10 +1,5 @@
 # 第14章 异步编程
 
-- Node
-- Express
-- 数据库
-- Ajax
-
 ## 回调函数概念
 
 - [知乎 - 回调函数（callback）是什么？](https://www.zhihu.com/question/19801131)

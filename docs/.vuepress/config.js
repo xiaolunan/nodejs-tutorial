@@ -100,6 +100,7 @@ module.exports = {
 
     // 侧边栏
     sidebar,
+    sidebarDepth: 2
   },
 
   /**

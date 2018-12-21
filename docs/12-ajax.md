@@ -1,11 +1,70 @@
 # 第12章 Ajax
 
-**学习目标**
-
-- 基本使用
-- jQuery 的 ajax
+- XHR
+- 封装 XHR
+  - 回调函数
+  - 兼容性问题
+- jQuery 的快捷方法
+- axios
 - 跨域
+  - JSONP
+  - CORS
+- XHR 2.0
+  - FormData
+  - 文件上传
 - 客户端模板引擎
+
+
+
+案例
+
+- 增删改查
+
+
+
+## 学习目标
+
+- Ajax
+  - 能够概述什么是Ajax
+  - 能够理解传统模式交互和Ajax模式交互的异同
+
+- 原生 XHR
+  - 能够掌握使用原生 XHR 发起 GET 请求
+  - 能够掌握使用原生 XHR 发起 POST 请求
+  - 能够理解 GET 请求与 POST 请求的区别
+  - 能够理解同步请求和异步请求的差异
+  - 能够理解什么是 GET 缓存
+  - 能够掌握让 GET 缓存失效的解决方法
+- JSON
+  - 能够理解并概述什么是 JSON
+  - 能够掌握将 JSON 格式字符串转换为 JavaScript 对象
+  - 能够掌握将 JavaScript 对象转换为 JSON 格式字符串
+- 客户端模板引擎
+  - 能够理解模板引擎的本质作用
+  - 能够理解模板引擎的实现原理
+  - 能够掌握使用模板引擎将请求响应数据渲染到页面中
+- 封装 Ajax
+  - 能够掌握 GET 请求方法的封装
+  - 能够掌握 POST 请求方法的封装
+  - 能够掌握 GET+POST 请求方法的封装
+  - 能够理解在异步操作中回调函数的意义
+
+- jQuery 中的 Ajax
+  - 能够掌握 $.ajax 的使用
+  - 能够掌握 $.get 的使用
+  - 能够掌握 $.post 的使用
+- XHR 2.0
+  - 能够掌握 FormData 对象的使用
+  - 能够掌握使用 XHR 2.0 异步上传文件
+  - 能够掌握使用 XHR 2.0 实现文件上传进度条
+- 跨域
+  - 能够理解什么是 Ajax 跨域
+  - 能够理解什么是同源策略
+  - 能够掌握使用 CORS 的方式进行跨域操作
+  - 能够掌握使用 JSONP 的方式进行跨域操作
+  - 能够理解 JSONP 跨域操作原理
+  - 能够掌握 jQuery 中的 ajax 通过 JSONP 进行跨域操作
+
 
 
 
@@ -44,7 +103,7 @@ xhr.send(null)
 xhr.onreadystatechange = function () {
   // 通过 xhr 的 readyState 判断此次请求的响应是否接收完成
   if (this.readyState === 4) {
-    // 通过 xhr 的 responseText 获取到响应的响应体
+    // 通过 xhr 的 responseText 获取到响应的响应体™
     console.log(this)
   }
 }

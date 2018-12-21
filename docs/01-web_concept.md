@@ -7,6 +7,8 @@
 - IP、DNS、端口号的作用
 - 命令行的使用
 
+
+
 ## 在浏览器输入一个地址到看到网站内容经历了什么
 
 ![è®¿é®ç½ç"](./assets/LSBAWS_HTTP_request_response.png)

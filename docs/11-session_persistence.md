@@ -284,14 +284,12 @@ document.cookie = 'fontSize=;expires=Thu, 01-Jan-1970 00:00:01 GMT';
 
 
 
-### jquery-cookie
-
-> https://github.com/carhartl/jquery-cookie
-
-
-
 ## 在 Node 中操作 Cookie
 
 ## Session
 
 ## Cookie 和 Session 的区别
+
+## 参考资料
+
+- https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Cookies

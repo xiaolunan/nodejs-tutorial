@@ -35,6 +35,8 @@ npm install npm --global
 
 ## 常用命令
 
+> 表格
+
 ```shell
 # 在项目中初始化一个 package.json 文件
 # 凡是使用 npm 来管理的项目都会有这么一个文件
@@ -117,7 +119,7 @@ npm 命令 --help
 
 
 
-## 解决 npm 被墙问题
+## 切换 npm 镜像源
 
 - `npm install jquery --registry=https://registry.npm.taobao.org`
 - `npm config set registry https://registry.npm.taobao.org`

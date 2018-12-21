@@ -158,6 +158,8 @@ module.exports = function (x, y) {
 
 ### 为什么 `exports = xxx` 不行
 
+> 画图
+
 exports 和 `module.exports` 的一个引用：
 
 ```javascript
@@ -287,6 +289,12 @@ var fs = require('fs')
 以 `./` 或 `../` 开头的模块标识就是文件模块，一般就是用户编写的。
 
 ### 第三方模块
+
+- moment
+- marked
+- ...
+
+
 
 一般就是通过 `npm install` 安装的模块就是第三方模块。
 

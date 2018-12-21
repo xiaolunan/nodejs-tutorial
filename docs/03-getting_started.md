@@ -1,29 +1,63 @@
 # 第3章 起步
 
+[TOC]
+
 ---
 
 ## 安装 Node 环境
 
-下载
+### 版本说明
 
-- 下载地址：https://nodejs.org/en/download/
-- 版本说明
-  - LTS 长期支持版，适用于开发和生产环境
-  - Current 最新版，适用于体验测试
+- LTS 长期支持版，适用于开发和生产环境
+- Current 最新版，适用于体验测试
 
-安装
+### 下载
 
-- 傻瓜式的一路 `next` 就可以了
+- https://nodejs.org/en/download/
+
+### 安装（Windows）
+
+![image-20181120125258392](./assets/image-20181120125258392-2689578.png)
+
+点击下一步
+
+![image-20181120125456932](./assets/image-20181120125456932-2689696.png)
+
+同意协议，点击下一步
+
+![image-20181120125522493](./assets/image-20181120125522493-2689722.png)
+
+点击下一步
+
+![image-20181120125605674](./assets/image-20181120125605674-2689765.png)
+
+点击下一步
+
+![image-20181120125801058](./assets/image-20181120125801058-2689881.png)
+
+点击下一步
+
+![image-20181120125831374](./assets/image-20181120125831374-2689911.png)
+
+点击 Install 开始安装
+
+![image-20181120125856275](./assets/image-20181120125856275-2689936.png)
+
+正在安装中...
+
+![image-20181120125920281](./assets/image-20181120125920281-2689960.png)
+
+安装完成，点击 Finish 结束。
 
 
-确认是否安装成功
 
-- 打开命令行，输入 `node --version` 或者 `node -v`
-	- 注意：如果是安装之前打开的命令行请在安装结束之后关闭重新打开再执行上述命令
+### 确认是否安装成功
 
-![image-20181107152816993](./assets/image-20181107152816993.png)
+打开命令行，输入 `node --version` 或者 `node -v`。如果能看到类似于下面输出 `v10.13.0` 的版本号，则表示安装成功。
 
----
+![image-20181120130926564](./assets/image-20181120130926564-2690566.png)
+
+> 注意：如果是安装之前打开的命令行请在安装结束之后关闭重新打开再执行上述命令
 
 ## REPL
 
@@ -133,24 +167,6 @@ server.listen(3000, function () {
 ### 全局成员
 
 > [Global Objects](https://nodejs.org/dist/latest-v10.x/docs/api/globals.html)
-
-- [Class: Buffer](https://nodejs.org/dist/latest-v10.x/docs/api/globals.html#globals_class_buffer)
-- [__dirname](https://nodejs.org/dist/latest-v10.x/docs/api/globals.html#globals_dirname)
-- [__filename](https://nodejs.org/dist/latest-v10.x/docs/api/globals.html#globals_filename)
-- [clearImmediate(immediateObject)](https://nodejs.org/dist/latest-v10.x/docs/api/globals.html#globals_clearimmediate_immediateobject)
-- [clearInterval(intervalObject)](https://nodejs.org/dist/latest-v10.x/docs/api/globals.html#globals_clearinterval_intervalobject)
-- [clearTimeout(timeoutObject)](https://nodejs.org/dist/latest-v10.x/docs/api/globals.html#globals_cleartimeout_timeoutobject)
-- [console](https://nodejs.org/dist/latest-v10.x/docs/api/globals.html#globals_console)
-- [exports](https://nodejs.org/dist/latest-v10.x/docs/api/globals.html#globals_exports)
-- [global](https://nodejs.org/dist/latest-v10.x/docs/api/globals.html#globals_global)
-- [module](https://nodejs.org/dist/latest-v10.x/docs/api/globals.html#globals_module)
-- [process](https://nodejs.org/dist/latest-v10.x/docs/api/globals.html#globals_process)
-- [require()](https://nodejs.org/dist/latest-v10.x/docs/api/globals.html#globals_require)
-- [setImmediate(callback[, ...args\])](https://nodejs.org/dist/latest-v10.x/docs/api/globals.html#globals_setimmediate_callback_args)
-- [setInterval(callback, delay\[, ...args\])](https://nodejs.org/dist/latest-v10.x/docs/api/globals.html#globals_setinterval_callback_delay_args)
-- [setTimeout(callback, delay[, ...args\])](https://nodejs.org/dist/latest-v10.x/docs/api/globals.html#globals_settimeout_callback_delay_args)
-- [URL](https://nodejs.org/dist/latest-v10.x/docs/api/globals.html#globals_url)
-- [URLSearchParams](https://nodejs.org/dist/latest-v10.x/docs/api/globals.html#globals_urlsearchparams)
 
 ### 模块化
 
