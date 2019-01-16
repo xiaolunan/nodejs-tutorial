@@ -1,20 +1,60 @@
-# 第13章 综合案例
+# 综合案例
+
+## 课程介绍
+
+### 案例演示
+
+### 核心知识点
+
+- 服务端开发
+  - 服务端
+  - Express
+  - 数据库
+  - HTTP
+  - ...
+- Ajax
+- 前后端交互开发
+
+### 学习目标
+
+> 核心：能掌握基本的网站前后端开发（博客系统）
+
+- 能掌握使用 express 开放静态资源
+- 能掌握模板引擎中提取母版页和模板继承的使用
+
+- 能理解路由模块的提取
+- 能理解数据库操作模块的封装
+- 能完成分类列表异步加载的前后端实现
+- 能完成删除分类功能
+- 能完成添加分类功能
+- 能完成编辑分类功能
+- 能完成用户列表功能
+- 能完成添加用户功能
+- 能完成删除用户功能
+- 能完成编辑用户功能
+- 能完成用户登录功能
+- 能完成用户退出功能
+- 能完成添加文章功能
+- 能完成文章列表功能
+- 能完成删除文章功能
+- 能完成编辑文章功能
+- 能完成添加广告图功能
+- 能完成广告图列表功能
+- 能完成删除广告图功能
+- 能完成编辑广告图功能
+- 能完成网站设置功能
+- 能完成个人中心功能
+- 能完成修改密码功能
+- 能根据文档使用 jquery-validation 验证插件
+- 能根据文档使用富文本编辑器插件
+- 能根据文档使用 ajv 验证插件
+- 能理解分页接口的实现
+- 能根据文档使用客户端分页插件
 
 
-
-## 学习目标
 
 - 能够理解 MVC 模式在项目中的意义
-- 能够完成基础的项目骨架
-- 能够理解基本的路由设计方式
-- 能够掌握模板引擎 layout 布局的使用
-- 能够掌握表格拖拽排序的处理流程
-
 - 分类管理
-  - 能够使用传统方式完成添加分类
-  - 能够使用传统方式完成分类列表展示
-  - 能够使用传统方式完成编辑分类
-  - 能够使用传统方式完成删除分类
 - 用户管理
   - 能够使用Ajax方式添加管理员
   - 能够使用Ajax方式展示管理员列表
@@ -23,7 +63,6 @@
 - 用户登录
   - 能够使用传统方式完成用户登录
   - 能够使用Ajax方式完成用户登录
-
 - 文章管理
   - 能够使用Ajax方式完成发布新文章
   - 能够通过查看文档掌握富文本编辑器的使用
@@ -50,7 +89,6 @@
   - 能够使用Ajax方式展示导航菜单列表
   - 能够使用Ajax方式编辑导航菜单项
   - 能够使用Ajax方式删除导航菜单项
-
 - 客户端前台
   - 能够使用Ajax方式加载轮播图列表
   - 能够使用Ajax+分页方式加载内容列表
@@ -60,26 +98,29 @@
 
 
 
-## 准备
+## 起步
 
 ### 初始化目录结构
 
 ```
 .
-├── node_modules 第三方包存储目录
+├── node_modules 第三方包存储目录(使用npm装包默认生成)
 ├── controllers 控制器
 ├── models 模型
 ├── public 静态资源
-├── views 视图
-├── app.js 应用程序启动入口
+├── views 视图(存储HTML视图文件)
+├── app.js 应用程序启动入口（加载Express，启动HTTP服务。。。）
 ├── config.js 应用配置文件
-├── .gitignore Git忽略文件
-├── package.json 项目包说明文件，用来存储项目名称，第三方包依赖等信息
-├── package-lock.json npm产生的包说明文件
+├── utils 存储工具模块（例如用来操作数据库的模块）
+├── middlewares 自定义中间件
+├── routes 存储路由相关模块
+├── package.json 项目包说明文件，用来存储项目名称，第三方包依赖等信息（通过 npm init初始化）
+├── package-lock.json npm产生的包说明文件（由npm装包自动产生）
 └── README.md 项目说明文件
+
 ```
 
-### 导入 Express
+### 初始化 Express
 
 1. 安装 Express
 
@@ -107,7 +148,7 @@ nodemon app.js
 
 4. 在浏览器中访问 `http://127.0.0.1:3000/`
 
-### 导入模板
+### 导入并开放静态资源
 
 1. 将模板中的 html 静态文件放到项目的 `views` 目录中
 2. 将模板中的静态资源放到 `public` 目录中
@@ -125,7 +166,17 @@ app.use('/public', express.static(path.join(__dirname, './public')))
 
 ```
 
+4. 测试访问 public 中的资源
+
 ### 导入模板引擎渲染页面
+
+在 Node 中，不仅仅有 art-template 这个，还有很多别的。
+
+- ejs
+- pug
+- handlebars
+- nunjucks
+- ...
 
 > 参考文档：
 >
@@ -166,6 +217,53 @@ app.get('/', (req, res, next) => {
 
 4. 修改页面中的静态资源引用路径让页面中的资源正常加载
 
+### 提取路由模块
+
+- 简单应用提取一个路由文件模块
+
+- 将来路由越来越多，所以按照不同的业务分门别类的创建了多个路由文件模块放到了 routes 目录中，好管理和维护。
+
+
+
+提取路由模块操作步骤：
+
+1. 创建路由文件
+
+2. 写入以下基本内容
+
+```javascript
+const express = require('express')
+const router = express.Router()
+
+// 自定义路由内容
+// router.get
+// router.get
+// router.post
+// ...
+
+module.exports = router
+
+```
+
+3. 在 `app.js` 中挂载路由模块
+
+```javascript
+...
+// 加载路由模块
+const 路由模块 = require('路由模块路径')
+
+...
+
+// 挂载路由模块到 app 上
+app.use(路由模块)
+
+...
+```
+
+4. 打开浏览器访问路由路径进行测试。
+
+
+
 ### 提取模板页
 
 > 参考文档：
@@ -173,30 +271,9 @@ app.get('/', (req, res, next) => {
 > - [art-template 模板继承](https://aui.github.io/art-template/docs/syntax.html#Template-inheritance)
 > - [art-template 子模板](https://aui.github.io/art-template/docs/syntax.html#Sub-template)
 
-### 拆分路由模块
 
-1. 创建 `router.js` 文件模块
 
-```javascript
-const express = require('express')
-const router = express.Router()
-
-router.get('/', (req, res) => res.render('index.html'))
-
-module.exports = router
-
-```
-
-2. 在 app.js 中挂载路由模块
-
-```javascript
-...
-const router = require('./router')
-
-app.use(router)
-
-...
-```
+### 走通页面路由导航
 
 
 
@@ -211,24 +288,84 @@ app.use(router)
 >
 > - https://github.com/mysqljs/mysql
 
-在 `utils/db.js` 中
+1. 安装
+
+```bash
+npm i mysql
+```
+
+2. 基本使用
 
 ```javascript
-const mysql = require('mysql');
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'me',
+  password : 'secret',
+  database : 'my_db'
+});
 
-const connection = mysql.createConnection({
+connection.connect();
+
+connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+  if (error) throw error;
+  console.log('The solution is: ', results[0].solution);
+});
+
+connection.end();
+```
+
+3. 上面的方式是创建了单个连接，不靠谱，一旦这个连接挂掉，就无法操作数据库。我们推荐使用连接池的方式来操作数据库，所以将单个连接的方式改为如下连接池的方式。
+
+```javascript
+var mysql = require('mysql');
+var pool  = mysql.createPool({
+  connectionLimit : 10,
+  host            : 'example.org',
+  user            : 'bob',
+  password        : 'secret',
+  database        : 'my_db'
+});
+
+pool.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+  if (error) throw error;
+  console.log('The solution is: ', results[0].solution);
+});
+
+```
+
+4. 我们在项目的很多地方都要操作数据库，所以为了方便，我们将数据库操作封装为了一个单独的工具模块放到了 `utils/db.js` 中，哪里使用就在哪里加载。
+
+```javascript
+const mysql = require('mysql')
+
+// 创建一个连接池
+// 连接池中创建了多个连接
+const pool = mysql.createPool({
+  connectionLimit: 10, // 连接池的限制大小
   host: 'localhost',
   user: 'root',
   password: '123456',
-  database: 'alishow62'
+  database: 'alishow63'
 })
 
-// 导出连接对象
-// 连接对象中有 query 方法
-// 注意：必须导出 connection，否则会报错
-module.exports = connection
+// 把连接池导出
+// 谁要操作数据库，谁就加载 db.js 模块，拿到 poll，点儿出 query 方法操作
+module.exports = pool
 
 ```
+
+5. 例如在 `xxx` 模块中需要操作数据库，则可以直接
+
+```javascript
+const db = require('db模块路径')
+
+// 执行数据库操作
+db.query()...
+
+```
+
+### 小结
 
 
 
@@ -262,14 +399,15 @@ $.ajax({
 二、服务端收到请求，提供请求方法为 `GET`, 请求路径为 `/api/categories` 的路由，响应分类列表数据
 
 ```javascript
-router.get('/api/categories', (req, res, next) => {
-  // 1. 操作数据库获取数据
+// 1. 添加接口路由
+router.get('/api/categories/list', (req, res, next) => {
+  // 2. 操作数据库获取数据
   db.query('SELECT * FROM `ali_cate`', function (err, data) {
     if (err) {
       throw err
     }
     
-  	// 2. 把数据响应给客户端
+  	// 3. 把数据响应给客户端
     res.send({
       success: true,
       data
@@ -281,7 +419,11 @@ router.get('/api/categories', (req, res, next) => {
 
 三、客户端正确的收到服务端响应的数据了，使用数据结合模板引擎渲染页面内容
 
-模板字符串：
+0. 配置客户端模板引擎
+   1. 下载
+   2. 引用
+
+1. 准备模板字符串
 
 ```html
 <script type="text/html" id="list_template">
@@ -349,7 +491,7 @@ router.get('/api/categories', (req, res, next) => {
 
 总结：
 
-- 客户端发起请求
+- 客户端发起请求，等待响应
 - 服务端收到请求
 - 服务端处理请求
 - 服务端发送响应
@@ -359,6 +501,9 @@ router.get('/api/categories', (req, res, next) => {
 ### 删除分类
 
 一、通过事件委托方式为动态渲染的删除按钮添加点击事件
+
+- 第一种把添加事件的代码放到数据列表渲染之后
+- 第二种使用事件代理（委托）的方式
 
 ```javascript
 ...
@@ -428,6 +573,7 @@ success: function (data) {
 }
 
 ...
+
 ```
 
 
@@ -580,31 +726,8 @@ success: function (resData) {
 
 ## 简单优化
 
-### 使用连接池操作数据库
+### 自动挂载路由
 
-```javascript
-const mysql = require('mysql')
-
-/**
- * 使用连接池连接操作数据库
- */
-const pool = mysql.createPool({
-  connectionLimit: 10,
-  host: 'localhost',
-  user: 'root',
-  password: '123456',
-  database: 'alishow62'
-})
-
-module.exports = pool
-
-```
-
-
-
-### 拆分路由模块
-
-- 按照业务分类将不同的路由放到不同的路由模块
 - 自动加载路由模块
   - 使用 [glob](https://github.com/isaacs/node-glob) 获取指定的文件路径
   - 循环路由模块文件路径挂载路由模块
@@ -631,7 +754,11 @@ routerFiles.forEach(routerPath => {
 ### 客户端表单数据验证
 
 - 自己写，自己判断
+  - if-else 正则表达式，直接上
 - [HTML5 表单验证](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Forms/Data_form_validation)
+  - 有兼容性问题
+  - 可以在兼容性比较好的移动端去使用
+  - 简单的校验需求就能满足
 - 基于 jQuery 的表单验证插件
   - 官方文档：https://jqueryvalidation.org/
   - Github 仓库：https://github.com/jquery-validation/jquery-validation
