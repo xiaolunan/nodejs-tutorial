@@ -635,6 +635,7 @@ function handleAdd() {
 ...
 
 /**
+ * 该方法目前可以在 4.16.0 之前使用，以后可能会废弃掉，建议还是使用之前 body-parser 的方式
  * 配置解析表单 POST 请求体（只能解析 Content-Type 为 application/x-www-form-urlencoded 数据）
  * 配置好以后，我们就可以在请求处理函数中通过 req.body 获取请求体数据
  * express 已经内置 body-parser
@@ -771,19 +772,39 @@ routerFiles.forEach(routerPath => {
 
 ### 服务端全局错误处理
 
-- 利用中间件：http://expressjs.com/en/guide/error-handling.html
+利用错误处理中间件：http://expressjs.com/en/guide/error-handling.html
+
+```javascript
+app.use((err, req, res, next) => {
+  // 1. 记录错误日志
+  // 2. 一些比较严重的错误，还应该通知网站负责人或是开发人员等
+  //    可以通过程序调用第三方服务，发短信，发邮件
+  // 3. 把错误消息发送到客户端 500 Server Internal Error
+  res.status(500).send({
+    error: err.message
+  })
+})
+```
+
+> 注意：执行错误处理中间件挂载的代码必须在我们的路由执行挂载之后
+
+然后在我们的路由处理中，如果有错误，就调用 next 函数传递错误对象，例如
+
+```javascript
+rouget.get('xxx', (req, res, next) => {
+  xxx操作
+  if (err) {
+    // 调用 next，传递 err 错误对象
+    return next(err)
+  }
+})
+```
+
+
 
 ### 客户端统一错误处理
 
 - 利用 jQuery 提供的全局 Ajax 事件处理函数：https://api.jquery.com/category/ajax/global-ajax-event-handlers/
-
-
-
-
-
-
-
-
 
 
 
@@ -839,11 +860,13 @@ routerFiles.forEach(routerPath => {
 - 记录用户登录状态
 - 基本的页面访问权限认真，如果用户没有登录，则让用户跳转到登录页面进行登录
 
-
+  ![用户登录处理流程](http://assets.processon.com/chart_image/5c419e62e4b056ae29f51eab.png)
 
 ## 状态保持
 
 ### Cookie 和 Session
+
+- HTTP 协议本身是无状态的
 
 - Cookie 发橘子，往背后贴纸条
 - Session 超市存物柜，东西放到柜子里，你拿着小票
@@ -922,11 +945,32 @@ app.use('/admin', (req, res, next) => {
 
 ```
 
+### 用户退出
+
+```javascript
+/**
+ * 用户退出
+ */
+router.get('/admin/logout', (req, res) => {
+  // 1. 清除登录状态
+  delete req.session.user
+  
+  // 2. 跳转到登录页
+  res.redirect('/admin/login')
+})
+
+```
 
 
-### 将模板页面公共的数据放到 `app.locals` 中
+
+
+
+### 展示当前登录用户名
 
 > 参考文档：http://expressjs.com/en/4x/api.html#app.locals
+
+- 把 Session 中的当前登录用户数据传递到页面模板中
+- app.locals 的应用
 
 简单点就是在每一次 render 页面的时候，把 req.session.user 传到模板中去使用。
 
@@ -1016,28 +1060,9 @@ app.use(session({
 
 ### 记住我
 
-每次往 Session 中写数据的时候，都会重新设置 Cookie 的过期时间。
-
-加入我在登录之后的某个业务操作中往 Session 中写了数据。
-
-用户登录
-
-服务端把（用户名+密码）加密放到 Cookie 中，发送给客户端，设置一个过期时间。
+![记住我处理流程](http://assets.processon.com/chart_image/5c419ffce4b048f108d5ce97.png)
 
 
-
-然后在用户每一次请求服务器的时候
-
-1. 检查 Session 中是否有登录状态
-2. 如果 Session 中有登录状态，则直接允许通过
-3. 如果 Session 中没有登录状态，则检查 Cookie 中是否有记住我的（用户名+密码）信息
-   1. 如果有，则拿出来，解密
-   2. 如果解密成功，则判断用户名+密码是否正确
-   3. 如果正确，则通过 Session 记录登录状态，允许通过，同时把过期时间继续往后推，重新设置 Cookie 的过期时间发送给浏览器
-
-
-
-加解密。
 
 对称加解密：加解密使用的私钥必须一致。
 
@@ -1089,7 +1114,7 @@ console.log(decrypted);
 
 ### 添加文章
 
-一、客户端表单处理
+一、客户端表单提交（带有文件的POST请求）处理
 
 ```javascript
 function handleSubmit() {
@@ -1120,43 +1145,108 @@ function handleSubmit() {
 
 二、服务端接口处理
 
+1. express 本身不处理文件上传
+2. 使用 [multer]() 处理带有文件的表单 POST 请求
+
+基本用法：（try-try-see）
+
+1. 安装
+
+```javascript
+npm i multer
+```
+
+2. 基本示例
+
+```javascript
+var express = require('express')
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' }) // 指定上传文件的存储路径
+
+var app = express()
+
+// /profile 是带有文件的 POST 请求，使用 multer 解析文件上传
+// upload.single() 需要给定一个参数：告诉multer，请求体中哪个字段是文件
+app.post('/profile', upload.single('avatar'), function (req, res, next) {
+  // req.file 是 `avatar` 文件的相关信息（原本的文件名，新的唯一名称，文件保存路径，文件大小...)
+  // req.body 是请求体中的那些普通的文本字段
+  // 数据库中不存储文件，文件还是存储在磁盘上，数据库中存储文件在我们 Web 服务中的 url 资源路径
+})
+```
+
+3. multer 保存的文件默认没有后缀名，如果需要的话，就需要下面这样来使用
+
+```javascript
+var storage = multer.diskStorage({
+  // 可以动态处理文件的保存路径
+  destination: function (req, file, cb) {
+    cb(null, '/tmp/my-uploads')
+  },
+  // 动态的处理保存的文件名
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now()) // 这里的关键是这个时间戳，能保证文件名的唯一性（不严谨）
+  }
+})
+
+var upload = multer({ storage: storage })
+
+app.post('/profile', upload.single('avatar'), function (req, res, next) {
+  // req.file 是 `avatar` 文件的相关信息（原本的文件名，新的唯一名称，文件保存路径，文件大小...)
+  // req.body 是请求体中的那些普通的文本字段
+  // 数据库中不存储文件，文件还是存储在磁盘上，数据库中存储文件在我们 Web 服务中的 url 资源路径
+})
+```
+
+4. 处理多文件
+
+有多个名字都一样的 file 类型的 input
+
+```javascript
+app.post('/photos/upload', upload.array('photos', 12), function (req, res, next) {
+  // req.files is array of `photos` files
+  // req.body will contain the text fields, if there were any
+})
+```
+
+处理多个不同名字的 file 类型的 input：
+
+```java
+var cpUpload = upload.fields([{ name: 'avatar', maxCount: 1 }, { name: 'gallery', maxCount: 8 }])
+app.post('/cool-profile', cpUpload, function (req, res, next) {
+  // req.files is an object (String -> Array) where fieldname is the key, and the value is array of files
+  //
+  // e.g.
+  //  req.files['avatar'][0] -> File
+  //  req.files['gallery'] -> Array
+  //
+  // req.body will contain the text fields, if there were any
+})
+```
 
 
 
 
-#### 富文本编辑器 Quill 的使用
 
-- github 仓库地址：https://github.com/quilljs/quill
+#### 富文本编辑器 wangEditor
+
+常见的富文本编辑器：
+
+- [Ueditor](https://ueditor.baidu.com/website/)
+- [CKeditor](https://ckeditor.com/)
+- [Quill](https://quilljs.com/)
+- [wangEditor](http://www.wangeditor.com/)
+- 太多了...
+
+
+
+这里我们以使用 wangEditor 为例：
+
+- github 仓库地址：https://github.com/wangfupeng1988/wangEditor
+- 官网：http://www.wangeditor.com/
+- 使用文档：http://www.kancloud.cn/wangfupeng/wangeditor3/332599
 - 下载
-  - https://github.com/quilljs/quill/releases
-- 基本配置
-  - https://quilljs.com/docs/quickstart/
-
-获取内容
-
-```javascript
-quill.root.innerHTML
-```
-
-设置内容
-
-```javascript
-editor.clipboard.dangerouslyPasteHTML(光标位置, 'HTML内容')
-```
-
-获取选中的位置
-
-```javascript
-
-```
-
-在指定的位置插入内容
-
-```javascript
-
-```
-
-
+- 使用
+- 配置
 
 ### 文章列表
 
