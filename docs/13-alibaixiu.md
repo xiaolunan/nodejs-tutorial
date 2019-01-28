@@ -120,7 +120,7 @@
 
 ```
 
-### 初始化 Express
+### 使用 Express 创建 Web 服务
 
 1. 安装 Express
 
@@ -168,7 +168,7 @@ app.use('/public', express.static(path.join(__dirname, './public')))
 
 4. 测试访问 public 中的资源
 
-### 导入模板引擎渲染页面
+### 使用模板引擎渲染页面
 
 在 Node 中，不仅仅有 art-template 这个，还有很多别的。
 
@@ -274,6 +274,8 @@ app.use(路由模块)
 
 
 ### 走通页面路由导航
+
+路由表：
 
 
 
@@ -871,7 +873,7 @@ rouget.get('xxx', (req, res, next) => {
 - Cookie 发橘子，往背后贴纸条
 - Session 超市存物柜，东西放到柜子里，你拿着小票
 
-### 配置使用 express-session 中间件
+### 使用 Session 存储登录状态
 
 > 参考文档：https://github.com/expressjs/session
 
@@ -947,6 +949,8 @@ app.use('/admin', (req, res, next) => {
 
 ### 用户退出
 
+- 实现用户退出接口
+
 ```javascript
 /**
  * 用户退出
@@ -961,11 +965,11 @@ router.get('/admin/logout', (req, res) => {
 
 ```
 
+- 使用 Ajax 请求完成用户退出
 
 
 
-
-### 展示当前登录用户名
+### 展示当前登录用户信息
 
 > 参考文档：http://expressjs.com/en/4x/api.html#app.locals
 
@@ -1031,34 +1035,7 @@ app.use(session({
 
 
 
-### Session 的过期时间
-
-默认情况下，Session 下发的小票是会话存储，只在用户访问网站期间一直有效，当浏览器关闭，小票就过期丢失了。
-
-如果需要让 Session 持久存储，我们可以通过修改 Session 下发的 Cookie 小票的过期时间来从而修改 Session 的过期时间。
-
-修改方式就是在配置 Session 中间件的位置进行修改。
-
-```javascript
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  store: sessionStore, // 告诉 express-session 中间件，使用 sessionStore 持久化 Session 数据
-  cookie: { // 配置 Session 自动下发的 Cookie 小票的信息
-    // Cookie 的过期时间不是给服务器用的，是给客户端用的
-    // 客户端在发送 Cookie 到服务器之前会校验 Cookie 的过期时间
-    // 如果 Cookie 过期了，客户端就不发送
-    // 如果 Cookie 没有过期，客户端才会发送携带过来
-    
-    // expires 不推荐使用，因为客户端和服务器时间不一定一致
-    // expires: '', // 给一个绝对时间，xx年xx月xx日 xx点xx分xx秒，
-    maxAge: 1000 * 60 // 相对（滑动）时间，给一个毫秒数，相对于现在的时间往后加 xxx 毫秒，再过期
-  }
-}))
-```
-
-### 记住我
+### 记住我（*）
 
 ![记住我处理流程](http://assets.processon.com/chart_image/5c419ffce4b048f108d5ce97.png)
 

@@ -49,6 +49,11 @@ module.exports = {
   // ga: '',
 
   /**
+   * 
+   */
+  cache: true,
+
+  /**
    * 如果设置成 true，VuePress 将会自动生成并且注册一个 service worker，它缓存了那些已访问过的页面的内容，用于离线访问（仅在生产环境生效）。
    * @type {Boolean}
    * 默认值: false
@@ -109,7 +114,15 @@ module.exports = {
    */
   plugins: [
     ['@vuepress/back-to-top'],
-    ['@vuepress/medium-zoom']
+    ['@vuepress/medium-zoom'],
+    ['@vuepress/last-updated', {
+      transformer: (timestamp, lang) => {
+        // 不要忘了安装 moment
+        const moment = require('moment')
+        moment.locale(lang)
+        return moment(timestamp).format('YYYY-MM-DD hh:mm:ss')
+      }
+    }]
   ],
 
   /**
