@@ -96,6 +96,8 @@
   - 能够使用Ajax方式完成发布评论
   - 能够使用Ajax+异步分页（加载更多）方式完成评论列表展示
 
+### 任务列表
+
 
 
 ## 起步
@@ -729,29 +731,6 @@ success: function (resData) {
 
 ## 简单优化
 
-### 自动挂载路由
-
-- 自动加载路由模块
-  - 使用 [glob](https://github.com/isaacs/node-glob) 获取指定的文件路径
-  - 循环路由模块文件路径挂载路由模块
-
-```javascript
-// 获取 routes 目录中所有的路由文件模块路径
-const routerFiles = glob.sync('./routes/**/*.js')
-
-// 循环路由模块路径，动态加载路由模块挂载到 app 中
-routerFiles.forEach(routerPath => {
-  const router = require(routerPath)
-  if (typeof router === 'function') {
-    // router.prefix 是我们添加的自定义属性，作用是用来设定路由的模块的访问前缀
-    // 当路由模块没有 prefix 的时候，我们给一个 / 作为默认值，相当于没有前缀限制。
-    // 因为所有的请求路径都以 / 开头
-    app.use(router.prefix || '/', router)
-  }
-})
-
-```
-
 
 
 ### 客户端表单数据验证
@@ -1242,4 +1221,37 @@ app.post('/cool-profile', cpUpload, function (req, res, next) {
 ## 个人中心
 
 ## 轮播广告管理
+
+
+
+## 发布上线
+
+- 服务器
+  - Windows（Windows Server / win7 / win10）
+  - **Linux**（CentOS / Ubuntu / Redhat）
+- Web 服务器软件
+- 域名
+
+### 服务器购买及配置
+
+- [阿里云](https://www.aliyun.com/)
+- 产品
+- 云服务器 ECS
+- 立即购买
+- 注册账号
+- 镜像的选择
+- 存储
+- 
+
+### 连接到远程服务器
+
+### 安装及配置 Web 服务器软件
+
+### 上传网站到服务器
+
+### 域名购买及解析
+
+### 总结
+
+
 
