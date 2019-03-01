@@ -11,7 +11,7 @@
 
 ## 在浏览器输入一个地址到看到网站内容经历了什么
 
-![è®¿é®ç½ç"](./assets/LSBAWS_HTTP_request_response.png)
+![è®¿é®ç½ç"](../../../在职加薪课/03-01 Node.js 网络通信/docs/assets/LSBAWS_HTTP_request_response.png)
 
 1. 用户在浏览器地址栏中输入网站域名
 2. 浏览器拿到该域名自动去请求 **DNS服务器查询** 用户输入的域名对应的 `ip` 地址

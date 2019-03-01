@@ -1,5 +1,11 @@
 # 第16章 其他
 
+## Node 面试资源
+
+- [ElemeFE / node-interview](https://github.com/ElemeFE/node-interview)
+
+
+
 ## nodemon
 
 在开发过程中，每次修改完代码手动重启服务器很麻烦。这里我们可以使用一个第三方命令行工具：[nodemon](https://github.com/remy/nodemon) 来帮我们解决这个问题。

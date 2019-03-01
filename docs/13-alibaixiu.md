@@ -864,6 +864,10 @@ rouget.get('xxx', (req, res, next) => {
 
   ![用户登录处理流程](http://assets.processon.com/chart_image/5c419e62e4b056ae29f51eab.png)
 
+## 找回密码
+
+- [找回密码的功能设计](http://www.ruanyifeng.com/blog/2019/02/password.html)
+
 ## 状态保持
 
 ### Cookie 和 Session

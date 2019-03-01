@@ -57,6 +57,12 @@
 
 ![event-loop](./assets/eventloop.jpg)
 
+### Event Loop（事件循环）
+
+- [菲利普·罗伯茨：到底什么是Event Loop呢？](https://youtu.be/8aGhZQkoFbQ)
+- [The Node.js Event Loop, Timers, and `process.nextTick()`](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/)
+- [阮一峰 - JavaScript 运行机制详解：再谈Event Loop](http://www.ruanyifeng.com/blog/2014/10/event-loop.html)
+
 ## Node 发展历史
 
 > 以下内容节选自：[来自朴灵大大的 -- Node.js 简史](https://cnodejs.org/topic/555d3d54e684c4c8088a0d78)
