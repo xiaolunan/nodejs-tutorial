@@ -12,6 +12,7 @@
   - 数据库
   - HTTP
   - ...
+- ECMAScript 6
 - Ajax
 - 前后端交互开发
 
@@ -109,12 +110,12 @@
 ├── node_modules 第三方包存储目录(使用npm装包默认生成)
 ├── controllers 控制器
 ├── models 模型
-├── public 静态资源
+├── public 静态资源（图片、样式、客户端js...）
 ├── views 视图(存储HTML视图文件)
 ├── app.js 应用程序启动入口（加载Express，启动HTTP服务。。。）
-├── config.js 应用配置文件
+├── config.js 应用配置文件（把经常需要改动的数据放到配置文件中，修改方便）
 ├── utils 存储工具模块（例如用来操作数据库的模块）
-├── middlewares 自定义中间件
+├── middlewares 放置自定义中间件
 ├── routes 存储路由相关模块
 ├── package.json 项目包说明文件，用来存储项目名称，第三方包依赖等信息（通过 npm init初始化）
 ├── package-lock.json npm产生的包说明文件（由npm装包自动产生）
@@ -153,7 +154,7 @@ nodemon app.js
 ### 导入并开放静态资源
 
 1. 将模板中的 html 静态文件放到项目的 `views` 目录中
-2. 将模板中的静态资源放到 `public` 目录中
+2. 将模板中的静态资源（css、图片、客户端js）放到 `public` 目录中
 
 3. 在 Web 服务中把 `public` 目录开放出来
 
@@ -172,7 +173,7 @@ app.use('/public', express.static(path.join(__dirname, './public')))
 
 ### 使用模板引擎渲染页面
 
-在 Node 中，不仅仅有 art-template 这个，还有很多别的。
+在 Node 中，不仅仅有 art-template 这个模板引擎，还有很多别的。
 
 - ejs
 - pug
@@ -200,10 +201,7 @@ npm i art-template express-art-template
 app.set('views', '模板文件存储路径')
 
 // express-art-template 内部依赖了 art-template
-app.engine('html', require('express-art-template'));
-app.set('view options', {
-  debug: process.env.NODE_ENV !== 'production'
-})
+app.engine('html', require('express-art-template'))
 
 ...
 ```
@@ -212,12 +210,17 @@ app.set('view options', {
 
 ```javascript
 app.get('/', (req, res, next) => {
+  // render 方法内部就会去
+  // 1. 读取文件
+  // 2. 模板引擎解析替换
+  // 3. 发送响应结果
   res.render('index.html')
 })
 
 ```
 
 4. 修改页面中的静态资源引用路径让页面中的资源正常加载
+5. 浏览测试
 
 ### 提取路由模块
 
@@ -277,7 +280,23 @@ app.use(路由模块)
 
 ### 走通页面路由导航
 
-路由表：
+| 请求路径                  | 作用                     | 备注 |
+| ------------------------- | ------------------------ | ---- |
+| /                         | 渲染门户端首页           |      |
+| /posts                    | 渲染门户端文章列表页     |      |
+| /posts/:id                | 渲染门户端文章详情页     |      |
+| /admin                    | 渲染管理系统首页         |      |
+| /admin/posts              | 渲染管理系统文章列表页   |      |
+| /admin/categories         | 渲染管理系统文章分类页   |      |
+| /admin/login              | 渲染管理系统登录页       |      |
+| /admin/users              | 渲染管理系统用户管理页   |      |
+| /admin/posts/new          | 渲染管理系统添加文章页面 |      |
+| /admin/banners            | 渲染管理系统轮播管理页面 |      |
+| /admin/website            | 渲染管理系统网站设置页面 |      |
+| /admin/comments           | 渲染管理系统评论管理页面 |      |
+| /admin/settings/profile   | 渲染管理系统个人中心页面 |      |
+| /admin/settings/reset-pwd | 渲染管理系统设置密码页面 |      |
+| ...                       | ...                      |      |
 
 
 
@@ -367,6 +386,60 @@ const db = require('db模块路径')
 // 执行数据库操作
 db.query()...
 
+```
+
+### 测试渲染文章列表页
+
+```javascript
+...
+const db = require('../utilds/db')
+...
+
+router.get('/admin/posts', (req, res, next) => {
+  db.query('SELECT * FROM `ali_aicle`', (err, ret) => {
+    if (err) {
+      throw err
+    }
+
+    res.render('admin/posts.html', {
+      posts: ret
+    })
+  })
+})
+
+...
+```
+
+
+
+### 服务端全局错误处理
+
+利用错误处理中间件：http://expressjs.com/en/guide/error-handling.html
+
+```javascript
+app.use((err, req, res, next) => {
+  // 1. 记录错误日志
+  // 2. 一些比较严重的错误，还应该通知网站负责人或是开发人员等
+  //    可以通过程序调用第三方服务，发短信，发邮件
+  // 3. 把错误消息发送到客户端 500 Server Internal Error
+  res.status(500).send({
+    error: err.message
+  })
+})
+```
+
+> 注意：执行错误处理中间件挂载的代码必须在我们的路由执行挂载之后
+
+然后在我们的路由处理中，如果有错误，就调用 next 函数传递错误对象，例如
+
+```javascript
+rouget.get('xxx', (req, res, next) => {
+  xxx操作
+  if (err) {
+    // 调用 next，传递 err 错误对象
+    return next(err)
+  }
+})
 ```
 
 ### 小结
@@ -750,36 +823,6 @@ success: function (resData) {
 
 - 基本数据校验
 - 业务数据校验
-
-### 服务端全局错误处理
-
-利用错误处理中间件：http://expressjs.com/en/guide/error-handling.html
-
-```javascript
-app.use((err, req, res, next) => {
-  // 1. 记录错误日志
-  // 2. 一些比较严重的错误，还应该通知网站负责人或是开发人员等
-  //    可以通过程序调用第三方服务，发短信，发邮件
-  // 3. 把错误消息发送到客户端 500 Server Internal Error
-  res.status(500).send({
-    error: err.message
-  })
-})
-```
-
-> 注意：执行错误处理中间件挂载的代码必须在我们的路由执行挂载之后
-
-然后在我们的路由处理中，如果有错误，就调用 next 函数传递错误对象，例如
-
-```javascript
-rouget.get('xxx', (req, res, next) => {
-  xxx操作
-  if (err) {
-    // 调用 next，传递 err 错误对象
-    return next(err)
-  }
-})
-```
 
 
 
