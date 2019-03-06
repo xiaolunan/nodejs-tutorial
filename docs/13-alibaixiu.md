@@ -1,4 +1,4 @@
-# 综合案例
+# 阿里百秀综合案例
 
 ## 课程介绍
 
@@ -103,7 +103,7 @@
 
 ## 起步
 
-### 初始化目录结构
+### 初始化项目目录结构
 
 ```
 .
@@ -274,7 +274,10 @@ app.use(路由模块)
 > 参考文档：
 >
 > - [art-template 模板继承](https://aui.github.io/art-template/docs/syntax.html#Template-inheritance)
+>   - extend
+>   - block
 > - [art-template 子模板](https://aui.github.io/art-template/docs/syntax.html#Sub-template)
+>   - include
 
 
 
@@ -304,6 +307,7 @@ app.use(路由模块)
 
 - 新建一个数据库命名为 `alishow`
 - 在 `alishow` 数据库中执行下发的数据库文件 `ali.sql`
+- 了解表的含义
 
 ### 封装数据库操作模块
 
@@ -441,6 +445,60 @@ rouget.get('xxx', (req, res, next) => {
   }
 })
 ```
+
+### 使用 errorhandler 美化错误输出页面
+
+> 参考文档：https://github.com/expressjs/errorhandler
+
+安装
+
+```bash
+# 注意：使用淘宝镜像源安装这个包可能会失败（淘宝镜像源也不能一劳永逸）
+# 建议使用 npm 官方镜像源安装这个包
+npm i errorhandler
+```
+
+配置
+
+```javascript
+...
+const errorhandler = require('errorhandler')
+...
+
+// 后面讲发布部署的时候再将这种方式，不用修改代码，可以在程序的外部决定内部的执行逻辑
+if (process.env.NODE_ENV === 'development') {
+  app.use(errorhandler())
+}
+
+```
+
+也可以错误消息输出到系统通知
+
+```javascript
+...
+var errorhandler = require('errorhandler')
+var notifier = require('node-notifier')
+
+...
+
+if (process.env.NODE_ENV === 'development') {
+  // only use in development
+  app.use(errorhandler({log: errorNotification}))
+}
+
+
+// 将错误输出消息输出到系统通知
+function errorNotification (err, str, req) {
+  var title = 'Error in ' + req.method + ' ' + req.url
+
+  notifier.notify({
+    title: title,
+    message: str
+  })
+}
+```
+
+
 
 ### 小结
 
@@ -708,46 +766,30 @@ function handleAdd() {
 
 1. 在 app.js 中配置解析表单 POST 请求体
 
-```javascript
-...
-
-/**
- * 该方法目前可以在 4.16.0 之前使用，以后可能会废弃掉，建议还是使用之前 body-parser 的方式
- * 配置解析表单 POST 请求体（只能解析 Content-Type 为 application/x-www-form-urlencoded 数据）
- * 配置好以后，我们就可以在请求处理函数中通过 req.body 获取请求体数据
- * express 已经内置 body-parser
- * express 通过 express.urlencoded 方法包装了 body-parser
- */
-app.use(express.urlencoded())
-
-...
-```
-
-
+   参考 [body-parser](https://github.com/expressjs/body-parser) 文档进行配置。
 
 2. 执行数据库操作和发送响应数据
 
 ```javascript
-router.post('/api/categories/create', (req, res, next) => {
-  // 1. 获取表单数据
+/**
+ * 添加分类
+ */
+router.post('/api/categories', (req, res, next) => {
+  // 1. 获取表单 POST 数据
   const body = req.body
-  
-  // 2. 验证数据的有效性（永远不要相信客户端的输入）
-
-  // 3. 操作数据库，执行插入操作
-  //    { cate_name: 'xxx', cate_slug: 'xxx' }
-  //    query 方法会把对象转为 filed1==value1&filed2=value2... 格式，替换到 sql 语句中的 ?
-  db.query('INSERT INTO `ali_cate` SET ?', body, (err, ret) => {
-    if (err) {
-      throw err
-    }
-    
-    // 4. 发送响应给客户端
-    res.send({
-      success: true,
-      data: ret
+  // 2. 操作数据库
+  db.query(
+    'INSERT INTO `ali_cate` SET `cate_name`=?, `cate_slug`=?',
+    [body.cate_name, body.cate_slug],
+    (err, ret) => {
+      if (err) {
+        return next(err)
+      }
+      // 3. 发送响应
+      res.status(200).json({
+        success: true
+      })
     })
-  })
 })
 ```
 
@@ -869,8 +911,173 @@ success: function (resData) {
 
 ### 添加用户
 
-- 插件表单验证
-- 异步请求验证
+#### jQuery Validation Plugin 表单验证
+
+- [官网](https://jqueryvalidation.org/)
+- [Github 仓库](https://github.com/jquery-validation/jquery-validation)
+- [菜鸟教程](http://www.runoob.com/jquery/jquery-plugin-validate.html)
+
+安装
+
+```bash
+npm i jquery-validation
+```
+
+加载
+
+```html
+<script src="jquery.js"></script>
+<script src="jquery.validate.js"></script>
+```
+
+配置验证规则
+
+```html
+<form id="form">
+  <input type="text" name="username" required>
+  <input type="password" name="password" required minlength="6" maxlength="18">
+</form>
+```
+
+注册验证
+
+```javascript
+// 该方法会自动监听表单的提交行为
+// 当你提交表单的时候，它就根据你在表单控件中设置的验证规则，进行验证
+// 如果验证失败，就在界面上给出提示
+// 如果验证通过，则调用 submitHandler 方法，所以我们可以把请求服务端提交数据的代码写到 submitHandler 中
+$('#form').validate({
+  submitHandler: function (form) { // form 就是验证的表单 DOM 对象
+  	console.log('验证通过')
+	}
+})
+```
+
+除了将验证规则写到标签上，页可以将验证规则写到 JavaScript 中（推荐，js更灵活）
+
+```javascript
+$("#signupForm").validate({
+  rules: {
+    firstname: "required",
+    lastname: "required",
+    username: {
+      required: true,
+      minlength: 2
+    },
+    password: {
+      required: true,
+      minlength: 5
+    },
+    confirm_password: {
+      required: true,
+      minlength: 5,
+      equalTo: "#password"
+    },
+    email: {
+      required: true,
+      email: true
+    },
+    topic: {
+      required: "#newsletter:checked",
+      minlength: 2
+    },
+    agree: "required"
+  }
+})
+
+```
+
+
+
+插件默认提示消息是英文的，可以修改默认文本提示语言，例如这里改成中文
+
+```html
+<script src="jquery.js"></script>
+<script src="/node_modules/jquery-validation/dist/jquery.validate.js"></script>
+<!-- 只需要加载该语言包文件，就会把英文变为中文 -->
+<script src="/node_modules/jquery-validation/dist/localization/messages_zh.js"></script>
+```
+如果想自定义错误提示消息，则可以通过 `messages` 选项自定义
+
+```javascript
+$("#signupForm").validate({
+  rules: {
+    firstname: "required",
+    lastname: "required",
+    username: {
+      required: true,
+      minlength: 2
+    },
+    password: {
+      required: true,
+      minlength: 5
+    },
+    confirm_password: {
+      required: true,
+      minlength: 5,
+      equalTo: "#password"
+    },
+    email: {
+      required: true,
+      email: true
+    },
+    topic: {
+      required: "#newsletter:checked",
+      minlength: 2
+    },
+    agree: "required"
+  },
+  messages: {
+    firstname: "请输入您的名字",
+    lastname: "请输入您的姓氏",
+    username: {
+      required: "请输入用户名",
+      minlength: "用户名必需由两个字母组成"
+    },
+    password: {
+      required: "请输入密码",
+      minlength: "密码长度不能小于 5 个字母"
+    },
+    confirm_password: {
+      required: "请输入密码",
+      minlength: "密码长度不能小于 5 个字母",
+      equalTo: "两次密码输入不一致"
+    },
+    email: "请输入一个正确的邮箱",
+    agree: "请接受我们的声明",
+    topic: "请选择两个主题"
+  }
+})
+
+```
+
+自定义错误提示文本样式
+
+```css
+form label.error {
+	color: red !important;
+}
+
+form input.error {
+  border: 1px solid red !important;
+  inset 0 1px 1px rgba(0,0,0,.075);
+}
+
+form input.valid {
+  border: 1px solid green !important;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+
+```
+
+
+
+异步验证
+
+- remote
+- 接口
+
+
 
 ### 删除用户
 
